@@ -1,13 +1,17 @@
 import { Helmet } from "react-helmet";
 import register_lottie from "../../assets/Register_lottie/Animation - 1734093605552.json"
 import Lottie from "lottie-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook, FaGithub } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import AuthContext from "../../Context/AuthContext";
+import toast from "react-hot-toast";
 const Registration = () => {
     const [districts, setdistricts] = useState(null)
     const [upozilas, setupozilas] = useState(null)
+    const navigate = useNavigate()
+    const { googleCreateUser, createUser, updateProfileuser, setUser } = useContext(AuthContext)
     useEffect(() => {
         fetch("district.json")
             .then(res => res.json())
@@ -18,6 +22,53 @@ const Registration = () => {
             .then(res => res.json())
             .then(data => setupozilas(data))
     }, [])
+
+    const handleGoogleSignup = () => {
+        googleCreateUser()
+            .then(result => {
+                toast.success("Successfully Created user")
+                navigate("/")
+            })
+            .catch(error => {
+                toast.error(error.message)
+            })
+    }
+
+    const handleRegistration = (e) => {
+        e.preventDefault();
+        const from = e.target;
+        const name = from.name.value;
+        const email = from.email.value;
+        const photo = from.photo.value;
+        const blood_group = from.blood_group.value;
+        const district = from.district.value;
+        const upozila = from.upozila.value;
+        const password = from.password.value;
+        const confirm_password = from.confirm_password.value;
+
+        const userRegistration = {
+            name, email, password, photo, blood_group, district, upozila, confirm_password
+        }
+        console.log(userRegistration);
+
+        createUser(email, password)
+            .then(result => {
+                toast.success("Successfully created user ")
+                updateProfileuser({ displayName: name, photoURL: photo })
+                    .then(result => {
+                        setUser((previoususer) => {
+                            return { ...previoususer, displayName: name, photoURL: photo }
+                        })
+                    })
+
+                navigate("/")
+            })
+            .catch(error => {
+                toast.error(error.message)
+            })
+
+    }
+
     return (
         <div>
             <Helmet>
@@ -31,7 +82,7 @@ const Registration = () => {
                     <div className="card bg-base-100 w-full max-w-sm shrink-0 ">
                         <h1 className="text-5xl font-bold mt-4 text-center">Register now!</h1>
 
-                        <form className="card-body" onSubmit={""}>
+                        <form className="card-body" onSubmit={handleRegistration}>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Name</span>
@@ -73,7 +124,7 @@ const Registration = () => {
                                     <option disabled selected>Dhaka</option>
 
                                     {
-                                        districts?.map(district => <option key={district._id}>{district.name}</option>)
+                                        districts?.map(district => <option key={district.id}>{district.name}</option>)
                                     }
 
                                 </select>
@@ -86,7 +137,7 @@ const Registration = () => {
 
 
                                     {
-                                        upozilas?.map(upozila => <option key={upozila._id}>{upozila.name}</option>)
+                                        upozilas?.map(upozila => <option key={upozila.id}>{upozila.name}</option>)
                                     }
 
                                 </select>
@@ -107,11 +158,11 @@ const Registration = () => {
                                 <button className="btn bg-black text-white">Sing Up</button>
                             </div>
                             <div>
-                                <p className="text-center text-[#D1A054] text-lg">Already Registered?<Link className="text-blue-500 font-bold">Go to log in</Link></p>
+                                <p className="text-center text-[#D1A054] text-lg">Already Registered?<Link to={"/login"} className="text-blue-500 font-bold">Go to log in</Link></p>
                                 <p className="text-center text-lg font-bold mt-2">Or sign up with</p>
                             </div>
                             <div className="flex justify-center gap-4 mt-5">
-                                <Link onClick={""}><FcGoogle className="text-5xl" /></Link>
+                                <Link onClick={handleGoogleSignup}><FcGoogle className="text-5xl" /></Link>
                                 <Link><FaFacebook className="text-5xl text-blue-600" /></Link>
                                 <Link><FaGithub className="text-5xl text-black" /></Link>
 

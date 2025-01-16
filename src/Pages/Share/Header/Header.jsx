@@ -1,7 +1,22 @@
 import { Link } from "react-router-dom";
 import logo from "../../../assets/bg.png"
+import { useContext } from "react";
+import AuthContext from "../../../Context/AuthContext";
+import toast from "react-hot-toast";
+import { FaCartArrowDown } from "react-icons/fa";
 
 const Header = () => {
+    const { user, logout } = useContext(AuthContext)
+    const handleLogOut = () => {
+        logout()
+            .then(result => {
+                toast.success("successfully log out")
+            })
+            .catch(error => {
+                toast.error(error.message)
+            })
+    }
+
     const navOptions = <>
         <li><Link to={"/"}>Home</Link></li>
         <li><Link to={"/donation-request"}>Donation Requests</Link></li>
@@ -9,7 +24,6 @@ const Header = () => {
         <li><Link to={"/contact"}>Funding</Link></li>
         <li><Link to={"/About"}>About</Link></li>
         <li><Link to={"/contact"}>Contact</Link></li>
-        {/* <li><Link onClick={handleLogOut}>Log out</Link></li> */}
 
 
 
@@ -53,17 +67,14 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className="navbar-end gap-4 ">
-                    {/* {
+                    {
                         user ? <>
-                            <p className="flex gap-2 btn">
-                                <FaCartArrowDown className="text-3xl text-black" />
+                            <Link className="btn" onClick={handleLogOut}>Log out</Link>
 
-                                <div className="badge badge-secondary">+0</div>
-                            </p>
 
                             <div className="avatar">
                                 <div className="w-12 rounded-full">
-                                    <img src={""} />
+                                    <img src={user?.photoURL} />
                                 </div>
                             </div>
                         </> :
@@ -71,7 +82,7 @@ const Header = () => {
                                 <Link className="btn" to={"/registration"}>Registration</Link>
                                 <Link className="btn bg-black text-white border-0" to={"/login"}>Login</Link>
                             </>
-                    } */}
+                    }
 
 
                 </div>

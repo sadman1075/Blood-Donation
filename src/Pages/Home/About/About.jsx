@@ -5,7 +5,7 @@ const About = () => {
     return (
         <div>
 
-            <div className="mt-10 mb-10 lg:mt-20 lg:mb-20" data-aos="zoom-in" data-aos-duration="2000">
+            <div className="mt-10 mb-10 lg:mt-20 lg:mb-20" >
                 <div className="hero bg-base-100 ">
                     <div className="hero-content flex-col lg:flex-row gap-5">
                         <div className="w-full lg:w-1/2">
@@ -14,7 +14,7 @@ const About = () => {
                                 className=" rounded-lg w-full lg:h-[500px]  " />
                         </div>
                         <div className="w-full lg:w-1/2 lg:ml-10">
-                            <h1 className="text-5xl font-bold ">About Our Website</h1>
+                            <h1 className="text-4xl lg:text-5xl font-bold ">About Our Website</h1>
                             <p className="py-6 text-justify">
                                 Blood Donation Management System, aims to bridge the gap between blood donors, recipients, and blood banks by providing a streamlined and efficient platform. The system will facilitate real-time connection among donors and recipients, making it easier to respond to emergencies and routine medical need.
                           

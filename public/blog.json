@@ -5,6 +5,7 @@
         "content": "Donating blood is a simple act that can save lives. Learn about the process, benefits, and how you can contribute to this noble cause.",
         "author": "Jane Doe",
         "date": "2025-01-15",
+        "image": "https://www.cedars-sinai.org/content/dam/cedars-sinai/programs-and-services/blood-donor/images/about-donation-donate-blood-mb.jpg",
         "tags": [
             "blood donation",
             "health",
@@ -22,6 +23,7 @@
         "content": "Think donating blood is risky? Believe you’re too old to donate? Let’s tackle these misconceptions and more.",
         "author": "John Doe",
         "date": "2025-01-10",
+        "image": "https://medlineplus.gov/images/BloodTransfusionandDonation_share.jpg",
         "tags": [
             "myths",
             "blood donation",
@@ -39,6 +41,7 @@
         "content": "Nervous about donating blood for the first time? Here's a complete guide to help you prepare and feel confident.",
         "author": "Sarah Lee",
         "date": "2025-01-05",
+        "image": "https://media.istockphoto.com/id/1399755101/photo/young-man-donating-blood.jpg?s=612x612&w=0&k=20&c=3VsuWSEnzFDQWImiE59NSere0uctOQsfp2nSOse623s=",
         "tags": [
             "tips",
             "first-time donors",

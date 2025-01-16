@@ -7,6 +7,8 @@ import Registration from "../Pages/Registration/Registration";
 import Login from "../Pages/Login/Login";
 import Dashboard from "../Layouts/Dashboard";
 import DashboardInfo from "../Pages/Dashboard/Dashboard/DashboardInfo";
+import Blogs from "../Pages/Home/Blogs/Blogs";
+import BlogDetails from "../Pages/Home/BlogDetails/BlogDetails";
 
 export const router = createBrowserRouter([
     {
@@ -32,6 +34,15 @@ export const router = createBrowserRouter([
             {
                 path: "/login",
                 element: <Login></Login>
+            },
+            {
+                path: "/blog",
+                element: <Blogs></Blogs>
+            },
+            {
+                path: "/blog-details/:id",
+                element: <BlogDetails></BlogDetails>,
+                loader:({params})=>fetch(`blog.json/${params.id}`)
             }
         ]
     },

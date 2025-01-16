@@ -2,13 +2,13 @@ import logo from "../../../assets/bg.png"
 
 const Footer = () => {
     return (
-        <div className="mt-20 ">
-            <footer className="footer bg-neutral text-neutral-content p-10">
+    <div className="pt-20 ">
+            <footer className="footer bg-neutral text-neutral-content lg:p-10">
                 <nav>
                     
                         <img src={logo} className="w-80 lg:w-80" alt="" />
                 </nav>
-                <nav>
+                <nav className="p-4">
                     <h6 className="footer-title">Quick Links 1</h6>
                     <a className="link link-hover">Home</a>
                     <a className="link link-hover">blood Donation</a>
@@ -16,14 +16,14 @@ const Footer = () => {
                     <a className="link link-hover">Blog</a>
                     <a className="link link-hover">Detail Blog</a>
                 </nav>
-                <nav>
+                <nav className="p-4">
                     <h6 className="footer-title">Quick Links 2</h6>
                     <a className="link link-hover">Favorites</a>
                     <a className="link link-hover">Donation</a>
                     <a className="link link-hover">Sign in</a>
                     <a className="link link-hover">Register</a>
                 </nav>
-                <nav>
+                <nav className="px-4">
                     <h6 className="footer-title">Contact Us</h6>
                     <a className="link link-hover">012345677676</a>
                     <a className="link link-hover">blooddonation@gmail.com </a>

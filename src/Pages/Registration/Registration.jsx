@@ -25,7 +25,7 @@ const Registration = () => {
             </Helmet>
             <div className="hero  min-h-screen pt-20">
                 <div className="hero-content flex-col lg:flex-row-reverse">
-                    <div className="text-center lg:text-left w-1/2 ">
+                    <div className="text-center lg:text-left lg:w-1/2 ">
                         <Lottie animationData={register_lottie}></Lottie>
                     </div>
                     <div className="card bg-base-100 w-full max-w-sm shrink-0 ">

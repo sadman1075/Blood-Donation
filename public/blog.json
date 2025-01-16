@@ -1,0 +1,53 @@
+[
+    {
+        "id": 1,
+        "title": "The Lifesaving Power of Blood Donation",
+        "content": "Donating blood is a simple act that can save lives. Learn about the process, benefits, and how you can contribute to this noble cause.",
+        "author": "Jane Doe",
+        "date": "2025-01-15",
+        "tags": [
+            "blood donation",
+            "health",
+            "community"
+        ],
+        "statistics": {
+            "views": 1500,
+            "likes": 230,
+            "shares": 45
+        }
+    },
+    {
+        "id": 2,
+        "title": "Top Myths About Blood Donation Debunked",
+        "content": "Think donating blood is risky? Believe you’re too old to donate? Let’s tackle these misconceptions and more.",
+        "author": "John Doe",
+        "date": "2025-01-10",
+        "tags": [
+            "myths",
+            "blood donation",
+            "health"
+        ],
+        "statistics": {
+            "views": 2000,
+            "likes": 340,
+            "shares": 80
+        }
+    },
+    {
+        "id": 3,
+        "title": "How to Prepare for Your First Blood Donation",
+        "content": "Nervous about donating blood for the first time? Here's a complete guide to help you prepare and feel confident.",
+        "author": "Sarah Lee",
+        "date": "2025-01-05",
+        "tags": [
+            "tips",
+            "first-time donors",
+            "blood donation"
+        ],
+        "statistics": {
+            "views": 1200,
+            "likes": 180,
+            "shares": 30
+        }
+    }
+]

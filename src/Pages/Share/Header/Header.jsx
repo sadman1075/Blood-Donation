@@ -20,8 +20,7 @@ const Header = () => {
     const navOptions = <>
         <li><Link to={"/"}>Home</Link></li>
         <li><Link to={"/donation-request"}>Donation Requests</Link></li>
-        <li><Link to={"/shop"}>blog</Link></li>
-        <li><Link to={"/contact"}>Funding</Link></li>
+        <li><Link to={"/blog"}>blog</Link></li>
         <li><Link to={"/About"}>About</Link></li>
         <li><Link to={"/contact"}>Contact</Link></li>
 
@@ -69,14 +68,21 @@ const Header = () => {
                 <div className="navbar-end gap-4 ">
                     {
                         user ? <>
-                            <Link className="btn" onClick={handleLogOut}>Log out</Link>
 
-
-                            <div className="avatar">
-                                <div className="w-12 rounded-full">
-                                    <img src={user?.photoURL} />
+                            <div className="dropdown dropdown-end">
+                                <div tabIndex={0} role="button" className="">
+                                    <div className="avatar">
+                                        <div className="w-12 rounded-full">
+                                            <img src={user?.photoURL} />
+                                        </div>
+                                    </div>
                                 </div>
+                                <ul tabIndex={0} className="dropdown-content menu bg-black  rounded-box z-[1] w-48  shadow">
+                                    <li><Link to={"/dashboard"}>Dashboard</Link></li>
+                                    <li><Link className="" onClick={handleLogOut}>Log out</Link></li>
+                                </ul>
                             </div>
+
                         </> :
                             <>
                                 <Link className="btn" to={"/registration"}>Registration</Link>

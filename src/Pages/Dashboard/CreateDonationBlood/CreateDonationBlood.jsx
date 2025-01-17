@@ -11,6 +11,8 @@ const CreateDonationBlood = () => {
     const [districts, setdistricts] = useState(null)
     const [upozilas, setupozilas] = useState(null)
     const [startDate, setStartDate] = useState(new Date());
+    const ms = startDate.getTime();
+   
 
 
     const { user } = useContext(AuthContext)
@@ -34,7 +36,7 @@ const CreateDonationBlood = () => {
         const hospital_name = from.hospital_name.value;
         const address = from.address.value;
         const blood_group = from.blood_group.value;
-        const date = from.date.value;
+        const date = ms;
         const time = from.time.value;
         const message = from.message.value;
         const name = from.name.value;

@@ -36,8 +36,8 @@ const Dashboard = () => {
                             </div>
                         </div>
                         <li><Link to={"/dashboard"}><MdDashboardCustomize />Dashboard</Link></li>
-                        <li><Link to={"/my-donation-request"}><BiSolidDonateBlood />My Donation Request</Link></li>
-                        <li><Link to={"/my-donation-request"}><IoIosCreate />Create Donation Request</Link></li>
+                        <li><Link to={"/dashboard/my-donation-request"}><BiSolidDonateBlood />My Donation Request</Link></li>
+                        <li><Link to={"/dashboard/create-blood-donation"}><IoIosCreate />Create Donation Request</Link></li>
                         <div className="divider"></div>
                         <li><Link to={"/"}><FaHome />Home</Link></li>
                         <li><Link to={"/donation-request"}><BiSolidDonateBlood />Donation Requests</Link></li>

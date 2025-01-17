@@ -13,12 +13,12 @@ const Registration = () => {
     const navigate = useNavigate()
     const { googleCreateUser, createUser, updateProfileuser, setUser } = useContext(AuthContext)
     useEffect(() => {
-        fetch("district.json")
+        fetch("/district.json")
             .then(res => res.json())
             .then(data => setdistricts(data))
     }, [])
     useEffect(() => {
-        fetch("upozila.json")
+        fetch("/upozila.json")
             .then(res => res.json())
             .then(data => setupozilas(data))
     }, [])
@@ -60,7 +60,7 @@ const Registration = () => {
                             return { ...previoususer, displayName: name, photoURL: photo }
                         })
                     })
-
+                from.reset();
                 navigate("/")
             })
             .catch(error => {

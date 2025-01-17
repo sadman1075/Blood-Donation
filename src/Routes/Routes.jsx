@@ -9,6 +9,8 @@ import Dashboard from "../Layouts/Dashboard";
 import DashboardInfo from "../Pages/Dashboard/Dashboard/DashboardInfo";
 import Blogs from "../Pages/Home/Blogs/Blogs";
 import BlogDetails from "../Pages/Home/BlogDetails/BlogDetails";
+import CreateDonationBlood from "../Pages/Dashboard/CreateDonationBlood/CreateDonationBlood";
+import MyDonationRequest from "../Pages/Dashboard/MyDonationRequest/MyDonationRequest";
 
 export const router = createBrowserRouter([
     {
@@ -42,7 +44,7 @@ export const router = createBrowserRouter([
             {
                 path: "/blog-details/:id",
                 element: <BlogDetails></BlogDetails>,
-                loader:({params})=>fetch(`blog.json/${params.id}`)
+                loader: ({ params }) => fetch(`http://localhost:5000/blog/${params.id}`)
             }
         ]
     },
@@ -54,6 +56,14 @@ export const router = createBrowserRouter([
                 path: "/dashboard",
                 element: <DashboardInfo></DashboardInfo>
             },
+            {
+                path: "/dashboard/create-blood-donation",
+                element: <CreateDonationBlood></CreateDonationBlood>
+            },
+            {
+                path: "/dashboard/my-donation-request",
+                element: <MyDonationRequest></MyDonationRequest>
+            }
         ]
     }
 ])

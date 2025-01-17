@@ -3,6 +3,7 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../../../Context/AuthContext";
+import Loader from "../../Loader/Loader";
 
 const MyDonationRequest = () => {
     const [donationinfos, setDonationinfos] = useState(null)
@@ -14,7 +15,7 @@ const MyDonationRequest = () => {
             .then(data => setDonationinfos(data.data))
     })
     if(isPending){
-        return <Loade
+        return <Loader></Loader>
     }
     return (
         <div>

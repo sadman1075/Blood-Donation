@@ -12,15 +12,41 @@ const MyDonationRequest = () => {
     const [donationinfos, setDonationinfos] = useState(null)
     const { user } = useContext(AuthContext)
 
-    const { data, isPending, error } = useQuery({
+    const { data, isPending } = useQuery({
         queryKey: ["donationinos"],
         queryFn: axios.get(`http://localhost:5000/my-donation-request?email=${user?.email}`)
             .then(data => setDonationinfos(data.data))
+
     })
+
     if (isPending) {
         return <Loader></Loader>
     }
 
+    const handledonestatus = (id) => {
+        console.log(id);
+        const { data, refetch } = useQuery({
+            queryKey: ["updates"],
+            queryFn: axios.put(`http://localhost:5000/donation-request-done/${id}`)
+                .then(data => {
+                    toast.success("you have successfully submitted")
+                })
+        })
+
+        refetch()
+
+    }
+    const handlecalcelstatus = (id) => {
+        console.log(id);
+        const { data, refetch } = useQuery({
+            queryKey: ["updates"],
+            queryFn: axios.put(`http://localhost:5000/donation-request-cancel/${id}`)
+                .then(data => {
+                    toast.success("you have successfully submitted")
+                })
+        })
+        refetch()
+    }
 
     return (
         <div>
@@ -57,9 +83,30 @@ const MyDonationRequest = () => {
                                         <td>{donationinfo.status}</td>
 
                                         <td className="flex">
-                                            <Link className="btn  bg-yellow-500 text-white ">View</Link>
-                                            <Link className="btn ml-2 bg-green-500 text-white">Edit</Link>
-                                            <Link className="btn ml-2 bg-red-500 text-white">Delete</Link>
+
+                                            {
+                                                donationinfo.status === "done" ? "" : donationinfo.status === "cancel" ? "" : donationinfo.status === "inprogress" ? <>
+                                                    <Link onClick={() => handledonestatus(donationinfo._id)} className="btn ml-2 bg-green-500 text-white">Done</Link>
+                                                    <Link onClick={() => handlecalcelstatus(donationinfo._id)} className="btn ml-2 bg-red-500 text-white">Cancel</Link>
+                                                </> : <>
+                                                    <Link className="btn  bg-yellow-500 text-white ">View</Link>
+                                                    <Link className="btn ml-2 bg-green-500 text-white">Edit</Link>
+                                                    <Link className="btn ml-2 bg-red-500 text-white">Delete</Link>
+                                                </>
+
+                                            }
+                                            {/* {
+                                                donationinfo.status === "inprogress" ? <>
+                                                    <Link className="btn ml-2 bg-green-500 text-white">Done</Link>
+                                                    <Link className="btn ml-2 bg-red-500 text-white">Cancel</Link>
+                                                </> :
+                                                    <>
+                                                        <Link className="btn  bg-yellow-500 text-white ">View</Link>
+                                                        <Link className="btn ml-2 bg-green-500 text-white">Edit</Link>
+                                                        <Link className="btn ml-2 bg-red-500 text-white">Delete</Link>
+                                                    </>
+                                            } */}
+
                                         </td>
                                     </tr>)
                                 }

@@ -95,17 +95,7 @@ const MyDonationRequest = () => {
                                                 </>
 
                                             }
-                                            {/* {
-                                                donationinfo.status === "inprogress" ? <>
-                                                    <Link className="btn ml-2 bg-green-500 text-white">Done</Link>
-                                                    <Link className="btn ml-2 bg-red-500 text-white">Cancel</Link>
-                                                </> :
-                                                    <>
-                                                        <Link className="btn  bg-yellow-500 text-white ">View</Link>
-                                                        <Link className="btn ml-2 bg-green-500 text-white">Edit</Link>
-                                                        <Link className="btn ml-2 bg-red-500 text-white">Delete</Link>
-                                                    </>
-                                            } */}
+                                       
 
                                         </td>
                                     </tr>)

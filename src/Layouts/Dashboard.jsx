@@ -1,15 +1,26 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { BiSolidDonateBlood } from "react-icons/bi";
-import { FaBloggerB, FaHome } from "react-icons/fa";
+import { FaBloggerB, FaHome, FaUser } from "react-icons/fa";
 import { FcAbout } from "react-icons/fc";
-import { MdContactPage, MdDashboardCustomize, MdRoundaboutLeft } from "react-icons/md";
+import { MdContactPage, MdDashboardCustomize, MdManageAccounts, MdRoundaboutLeft } from "react-icons/md";
 import { RiSidebarFoldFill } from "react-icons/ri";
 import { Link, Outlet } from "react-router-dom";
 import AuthContext from "../Context/AuthContext";
 import { IoIosCreate } from "react-icons/io";
+import { useQuery } from "@tanstack/react-query";
+import Loader from "../Pages/Loader/Loader";
+import axios from "axios";
 
 const Dashboard = () => {
-    const {user}=useContext(AuthContext)
+    const { user,duser } = useContext(AuthContext)
+    const isAdmin = false;
+    const isVolunteer = true;
+   
+
+
+
+
+
     return (
         <div>
             <div className="drawer lg:drawer-open">
@@ -35,9 +46,30 @@ const Dashboard = () => {
                                 <img src={user?.photoURL} />
                             </div>
                         </div>
-                        <li><Link to={"/dashboard"}><MdDashboardCustomize />Dashboard</Link></li>
-                        <li><Link to={"/dashboard/my-donation-request"}><BiSolidDonateBlood />My Donation Request</Link></li>
-                        <li><Link to={"/dashboard/create-blood-donation"}><IoIosCreate />Create Donation Request</Link></li>
+                        {
+                            duser.role==="Admin" ? <>
+                                <li><Link to={"/dashboard/all-users"}><FaUser />All Users</Link></li>
+                                <li><Link to={"/dashboard/all-blood-donation-request"}><BiSolidDonateBlood />All Blood Donation Request</Link></li>
+                                <li><Link to={"/dashboard/content-management"}><MdManageAccounts />Content Management</Link></li>
+
+                            </>
+                                :
+                                duser.role==="volunteer" ?
+                                    <>
+                                        <li><Link to={"/dashboard/volunteer/all-blood-donation-request"}><BiSolidDonateBlood />All Blood Donation Request</Link></li>
+                                        <li><Link to={"/dashboard/volunteer/content-management"}><MdManageAccounts />Content Management</Link></li>
+
+
+                                    </>
+                                    :
+                                    <>
+                                        <li><Link to={"/dashboard/dashboardinfo"}><MdDashboardCustomize />Dashboard</Link></li>
+                                        <li><Link to={"/dashboard/my-donation-request"}><BiSolidDonateBlood />My Donation Request</Link></li>
+                                        <li><Link to={"/dashboard/create-blood-donation"}><IoIosCreate />Create Donation Request</Link></li>
+
+                                    </>
+                        }
+
                         <div className="divider"></div>
                         <li><Link to={"/"}><FaHome />Home</Link></li>
                         <li><Link to={"/donation-request"}><BiSolidDonateBlood />Donation Requests</Link></li>

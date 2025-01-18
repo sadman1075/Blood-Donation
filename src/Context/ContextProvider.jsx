@@ -2,10 +2,26 @@ import { useEffect, useState } from 'react';
 import AuthContext from './AuthContext';
 import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import auth from '../Firebase/Firebase';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
 const ContextProvider = ({ children }) => {
     const [loading, setLoading] = useState(true)
     const [user, setUser] = useState(null)
+    const [duser, setDuser] = useState(null)
+
+    // const { data } = useQuery({
+    //     queryKey: ["duser"],
+    //     queryFn: axios.get(`http://localhost:5000/user?email=${user?.email}`)
+    //         .then(data => setDuser(data.data))
+    // })
+
+
+    useEffect(() => {
+        axios.get(`http://localhost:5000/user?email=${user?.email}`)
+            .then(data => setDuser(data.data))
+    }, [user?.email])
+
 
     const provider = new GoogleAuthProvider();
 
@@ -24,9 +40,9 @@ const ContextProvider = ({ children }) => {
         return signInWithEmailAndPassword(auth, email, password)
     }
 
-    const updateProfileuser=(updateuserProfile)=>{
+    const updateProfileuser = (updateuserProfile) => {
         setLoading(true)
-        return updateProfile(auth.currentUser,updateuserProfile)
+        return updateProfile(auth.currentUser, updateuserProfile)
     }
     const logout = () => {
         setLoading(true)
@@ -42,7 +58,7 @@ const ContextProvider = ({ children }) => {
     }, [])
 
 
-    const authInfo = { loading, user, googleCreateUser, createUser, loginUser, logout,updateProfileuser,setUser }
+    const authInfo = { loading, user, duser, googleCreateUser, createUser, loginUser, logout, updateProfileuser, setUser }
     return (
         <div>
             <AuthContext.Provider value={authInfo}>

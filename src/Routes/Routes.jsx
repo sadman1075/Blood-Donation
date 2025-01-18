@@ -13,8 +13,15 @@ import CreateDonationBlood from "../Pages/Dashboard/CreateDonationBlood/CreateDo
 import MyDonationRequest from "../Pages/Dashboard/MyDonationRequest/MyDonationRequest";
 import AllDonationRequest from "../Pages/AllDonationRequest/AllDonationRequest";
 import AllDonationRequestDetails from "../Pages/AllDonationRequestDetails/AllDonationRequestDetails";
+import PrivateRoutes from "./PrivateRoutes";
+import AllUser from "../Pages/AdminDashboard/AllUser/AllUser";
+import AllBloodDonationRequest from "../Pages/AdminDashboard/AllBloodDonationRequest/AllBloodDonationRequest";
+import ContentManagement from "../Pages/AdminDashboard/ContentManagement/ContentManagement";
+import AllBloodDonationReqVolunteer from "../Pages/VolunteerDashboard/AllBloodDonationReq/AllBloodDonationReqVolunteer";
+import ContentManagementVolunteer from "../Pages/VolunteerDashboard/ContentManagement/ContentManagementVolunteer";
 
 export const router = createBrowserRouter([
+
     {
         path: "/",
         element: <Layouts></Layouts>,
@@ -45,7 +52,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/blog-details/:id",
-                element: <BlogDetails></BlogDetails>,
+                element: <PrivateRoutes><BlogDetails></BlogDetails></PrivateRoutes>,
                 loader: ({ params }) => fetch(`http://localhost:5000/blog/${params.id}`)
             },
             {
@@ -54,7 +61,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/donation-request-details/:id",
-                element: <AllDonationRequestDetails></AllDonationRequestDetails>,
+                element: <PrivateRoutes><AllDonationRequestDetails></AllDonationRequestDetails></PrivateRoutes>,
                 loader: ({ params }) => fetch(`http://localhost:5000/donation-request-details/${params.id}`)
 
             }
@@ -62,19 +69,39 @@ export const router = createBrowserRouter([
     },
     {
         path: "/dashboard",
-        element: <Dashboard></Dashboard>,
+        element: <PrivateRoutes><Dashboard></Dashboard></PrivateRoutes>,
         children: [
             {
-                path: "/dashboard",
-                element: <DashboardInfo></DashboardInfo>
+                path: "/dashboard/dashboardinfo",
+                element: <PrivateRoutes><DashboardInfo></DashboardInfo></PrivateRoutes>
             },
             {
                 path: "/dashboard/create-blood-donation",
-                element: <CreateDonationBlood></CreateDonationBlood>
+                element: <PrivateRoutes><CreateDonationBlood></CreateDonationBlood></PrivateRoutes>
             },
             {
                 path: "/dashboard/my-donation-request",
-                element: <MyDonationRequest></MyDonationRequest>
+                element: <PrivateRoutes><MyDonationRequest></MyDonationRequest></PrivateRoutes>
+            },
+            {
+                path:"/dashboard/all-users",
+                element:<AllUser></AllUser>
+            },
+            {
+                path:"/dashboard/all-blood-donation-request",
+                element:<AllBloodDonationRequest></AllBloodDonationRequest>
+            },
+            {
+                path:"/dashboard/content-management",
+                element:<ContentManagement></ContentManagement>
+            },
+            {
+                path:"/dashboard/volunteer/all-blood-donation-request",
+                element:<AllBloodDonationReqVolunteer></AllBloodDonationReqVolunteer>
+            },
+            {
+                path:"/dashboard/volunteer/content-management",
+                element:<ContentManagementVolunteer></ContentManagementVolunteer>
             }
         ]
     }

@@ -7,11 +7,13 @@ import { FaFacebook, FaGithub } from "react-icons/fa";
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../Context/AuthContext";
 import toast from "react-hot-toast";
+import useUserhooks from "../hooks/useUserhooks";
 const Registration = () => {
     const [districts, setdistricts] = useState(null)
     const [upozilas, setupozilas] = useState(null)
     const navigate = useNavigate()
     const { googleCreateUser, createUser, updateProfileuser, setUser } = useContext(AuthContext)
+    const axiosPublic = useUserhooks()
     useEffect(() => {
         fetch("/district.json")
             .then(res => res.json())
@@ -26,7 +28,27 @@ const Registration = () => {
     const handleGoogleSignup = () => {
         googleCreateUser()
             .then(result => {
-                toast.success("Successfully Created user")
+                const name = result.user.displayName;
+                const email = result.user.email;
+                const image = result.user.photoURL;
+                const status = "active"
+                const userinfo = {
+                    name: name,
+                    email: email,
+                    image: image,
+                    status: status,
+                }
+                axiosPublic.post("/users", userinfo)
+                    .then(res => {
+                        if (res.data.insertedId) {
+                            toast.success("Successfully created user ")
+
+                        }
+                        else {
+                            toast.error("user Already exists")
+                            return navigate("/registration")
+                        }
+                    })
                 navigate("/")
             })
             .catch(error => {
@@ -45,21 +67,39 @@ const Registration = () => {
         const upozila = from.upozila.value;
         const password = from.password.value;
         const confirm_password = from.confirm_password.value;
+        const status = "active";
 
         const userRegistration = {
             name, email, password, photo, blood_group, district, upozila, confirm_password
         }
+
         console.log(userRegistration);
 
         createUser(email, password)
             .then(result => {
-                toast.success("Successfully created user ")
                 updateProfileuser({ displayName: name, photoURL: photo })
                     .then(result => {
                         setUser((previoususer) => {
                             return { ...previoususer, displayName: name, photoURL: photo }
                         })
                     })
+                const userinfo = {
+                    name: name,
+                    email: email,
+                    image: photo,
+                    status: status
+                }
+                axiosPublic.post("/users", userinfo)
+                    .then(res => {
+                        if (res.data.insertedId) {
+                            toast.success("Successfully created user ")
+
+                        }
+                        else {
+                            toast.error("user Already exists")
+                        }
+                    })
+
                 from.reset();
                 navigate("/")
             })

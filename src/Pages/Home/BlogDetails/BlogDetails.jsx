@@ -7,7 +7,7 @@ import { Link, useLoaderData } from "react-router-dom";
 const BlogDetails = () => {
     const blog = useLoaderData()
     console.log(blog)
-    const { image, author, title, date, content, statistics, tags } = blog
+    const { image, author, title, date, content, statistics } = blog
 
     return (
         <div>
@@ -38,11 +38,7 @@ const BlogDetails = () => {
 
                     <p className='mt-5 text-justify p-2'>{content}</p>
                     <p className=' text-justify px-2'><b>date:</b> {date}</p>
-                    <div className="mt-4 flex justify-center gap-2 rounded-lg">
-                        {
-                            tags.map(tag => <p className="p-2 bg-red-300 rounded-xl" key={tag.id}>{tag}</p>)
-                        }
-                    </div>
+
                     <div className=' flex items-center gap-3'>
 
 

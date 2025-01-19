@@ -11,7 +11,7 @@ const DashboardInfo = () => {
     const [donationinfos, setDonationinfos] = useState(null)
     const { user } = useContext(AuthContext)
 
-    const { data, isPending, error } = useQuery({
+    const { data, isPending } = useQuery({
         queryKey: ["donationinos"],
         queryFn: axios.get(`http://localhost:5000/my-latest-donation-request?email=${user?.email}`)
             .then(data => setDonationinfos(data.data))

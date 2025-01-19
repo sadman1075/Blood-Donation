@@ -16,9 +16,9 @@ import AllDonationRequestDetails from "../Pages/AllDonationRequestDetails/AllDon
 import PrivateRoutes from "./PrivateRoutes";
 import AllUser from "../Pages/AdminDashboard/AllUser/AllUser";
 import AllBloodDonationRequest from "../Pages/AdminDashboard/AllBloodDonationRequest/AllBloodDonationRequest";
-import ContentManagement from "../Pages/AdminDashboard/ContentManagement/ContentManagement";
 import AllBloodDonationReqVolunteer from "../Pages/VolunteerDashboard/AllBloodDonationReq/AllBloodDonationReqVolunteer";
-import ContentManagementVolunteer from "../Pages/VolunteerDashboard/ContentManagement/ContentManagementVolunteer";
+import ContentManagements from "../Pages/AdminDashboard/ContentManagement/ContentManagements";
+import AddBlog from "../Pages/AdminDashboard/AddBlog/AddBlog";
 
 export const router = createBrowserRouter([
 
@@ -93,16 +93,17 @@ export const router = createBrowserRouter([
             },
             {
                 path:"/dashboard/content-management",
-                element:<ContentManagement></ContentManagement>
+                element:<ContentManagements></ContentManagements>
+            },
+            {
+                path:"/dashboard/add-blog",
+                element:<AddBlog></AddBlog>
             },
             {
                 path:"/dashboard/volunteer/all-blood-donation-request",
                 element:<AllBloodDonationReqVolunteer></AllBloodDonationReqVolunteer>
             },
-            {
-                path:"/dashboard/volunteer/content-management",
-                element:<ContentManagementVolunteer></ContentManagementVolunteer>
-            }
+           
         ]
     }
 ])

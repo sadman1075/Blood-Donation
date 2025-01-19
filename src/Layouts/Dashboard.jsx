@@ -13,11 +13,6 @@ import axios from "axios";
 
 const Dashboard = () => {
     const { user,duser } = useContext(AuthContext)
-    const isAdmin = false;
-    const isVolunteer = true;
-   
-
-
 
 
 
@@ -57,7 +52,7 @@ const Dashboard = () => {
                                 duser.role==="volunteer" ?
                                     <>
                                         <li><Link to={"/dashboard/volunteer/all-blood-donation-request"}><BiSolidDonateBlood />All Blood Donation Request</Link></li>
-                                        <li><Link to={"/dashboard/volunteer/content-management"}><MdManageAccounts />Content Management</Link></li>
+                                        <li><Link to={"/dashboard/content-management"}><MdManageAccounts />Content Management</Link></li>
 
 
                                     </>

@@ -7,14 +7,18 @@ import toast from "react-hot-toast";
 
 const AllUser = () => {
     const [users, setUsers] = useState(null)
-    const { data, isPending } = useQuery({
-        queryKey: ["donationinos"],
-        queryFn: axios.get("http://localhost:5000/users")
+    const [status, setStatus] = useState("")
+    const { data, isLoading,isFetching } = useQuery({
+        queryKey: ["donationinos",users],
+        queryFn: axios.get(`http://localhost:5000/users?status=${status}`)
             .then(data => setUsers(data.data))
 
     })
-
-    if (isPending) {
+  
+if(isFetching){
+    return <Loader></Loader>
+}
+    if (isLoading) {
         return <Loader></Loader>
     }
 
@@ -49,9 +53,36 @@ const AllUser = () => {
         })
         refetch()
     }
+    const handleVolunteer = (id) => {
+        const { data, refetch } = useQuery({
+            queryKey: ["updates"],
+            queryFn: axios.put(`http://localhost:5000/users-role-volunteer/${id}`)
+                .then(data => {
+                    toast.success("you have successfully submitted")
+                })
+        })
+        refetch()
+    }
+    const handleUser = (id) => {
+        const { data, refetch } = useQuery({
+            queryKey: ["updates"],
+            queryFn: axios.put(`http://localhost:5000/users-role-user/${id}`)
+                .then(data => {
+                    toast.success("you have successfully submitted")
+                })
+        })
+        refetch()
+    }
     return (
         <div>
             <h1 className="mb-10 font-bold text-3xl lg:text-5xl text-center">All Users</h1>
+            <div>
+                <select className="select select-ghost border-1 border-gray-300 bg-white w-full " onChange={(e) => setStatus(e.target.value)} required>
+                    <option disabled selected>Select status</option>
+                    <option>active</option>
+                    <option>blocked</option>
+                </select>
+            </div>
             {
                 users?.length == 0 ? <p className="text-center font-bold  lg:text-5xl text-red-400 mb-10">There is no user yet </p> :
 
@@ -82,7 +113,23 @@ const AllUser = () => {
                                         </div></td>
                                         <td>{user.name}</td>
                                         <td>{user.email}</td>
-                                        <td>{user.role === "Admin" ? "Admin" : <Link onClick={() => handleAdmin(user._id)} className="btn bg-yellow-500 text-white">Make Admin</Link>}</td>
+                                        <td>
+                                            {user.role === "Admin" ? "Admin" :
+                                                user.role === "volunteer" ? <>
+                                                    <Link onClick={() => handleUser(user._id)} className="btn bg-green-500 text-white">Make user</Link>
+                                                    <Link onClick={() => handleAdmin(user._id)} className="btn bg-yellow-500 text-white">Make Admin</Link>
+
+                                                </>
+                                                    :
+                                                    <>
+                                                        <Link onClick={() => handleVolunteer(user._id)} className="btn bg-purple-500 text-white">Make Volunteer</Link>
+                                                        <Link onClick={() => handleAdmin(user._id)} className="btn bg-yellow-500 text-white">Make Admin</Link>
+
+                                                    </>
+                                            }
+                                        </td>
+
+
                                         <td>{user.status}</td>
                                         <td>{user.status === "active" ? <Link onClick={() => handleStatusBlock(user._id)} className="btn bg-red-500 text-white">Block</Link> : <Link onClick={() => handleStatusUnblock(user._id)} className="btn bg-green-500 text-white">Unblock</Link>}</td>
 

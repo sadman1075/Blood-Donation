@@ -13,9 +13,10 @@ const MyDonationRequest = () => {
     const { user } = useContext(AuthContext)
 
     const { data, isPending } = useQuery({
-        queryKey: ["donationinos"],
-        queryFn: axios.get(`http://localhost:5000/my-donation-request?email=${user?.email}`)
-            .then(data => setDonationinfos(data.data))
+        queryKey: ["donation"],
+        queryFn: async () => fetch(`http://localhost:5000/my-donation-request?email=${user?.email}`)
+            .then(res => res.json())
+            .then(data => setDonationinfos(data))
 
     })
 
@@ -95,7 +96,7 @@ const MyDonationRequest = () => {
                                                 </>
 
                                             }
-                                       
+
 
                                         </td>
                                     </tr>)

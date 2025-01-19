@@ -10,9 +10,19 @@ import { IoIosCreate } from "react-icons/io";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../Pages/Loader/Loader";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const Dashboard = () => {
-    const { user,duser } = useContext(AuthContext)
+    const { user,duser,logout } = useContext(AuthContext)
+    const handleLogOut = () => {
+        logout()
+            .then(result => {
+                toast.success("successfully log out")
+            })
+            .catch(error => {
+                toast.error(error.message)
+            })
+    }
 
 
 
@@ -72,6 +82,9 @@ const Dashboard = () => {
                         <li><Link to={"/About"}><MdRoundaboutLeft className="text-black" />
                             About</Link></li>
                         <li><Link to={"/contact"}><MdContactPage />Contact</Link></li>
+                        <div className="mt-16">
+                            <Link className="btn bg-black text-white text-center w-full"onClick={handleLogOut}>Log out</Link>
+                        </div>
 
                     </ul>
                 </div>

@@ -1,26 +1,23 @@
 import { useQueries, useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Loader from "../../Loader/Loader";
 import toast from "react-hot-toast";
+import { useMutation } from '@tanstack/react-query';
 
 const AllUser = () => {
     const [users, setUsers] = useState(null)
     const [status, setStatus] = useState("")
-    const { data, isLoading,isFetching } = useQuery({
-        queryKey: ["donationinos",users],
-        queryFn: axios.get(`http://localhost:5000/users?status=${status}`)
-            .then(data => setUsers(data.data))
+    const { data, isLoading, } = useQuery({
+        queryKey: ["status", status],
+        queryFn: async()=>fetch(`http://localhost:5000/users?status=${status}`)
+        .then(res=>res.json())
+            .then(data => setUsers(data))
 
     })
-  
-if(isFetching){
-    return <Loader></Loader>
-}
-    if (isLoading) {
-        return <Loader></Loader>
-    }
+
+
 
     const handleStatusBlock = (id) => {
         const { data, refetch } = useQuery({

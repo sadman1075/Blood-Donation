@@ -13,8 +13,10 @@ const AllBloodDonationRequest = () => {
 
     const { data, isPending } = useQuery({
         queryKey: ["donationinos"],
-        queryFn: axios.get("http://localhost:5000/all-donation-request")
-            .then(data => setDonationinfos(data.data))
+        queryFn: async () => fetch("http://localhost:5000/all-donation-request")
+            .then(res => res.json())
+
+            .then(data => setDonationinfos(data))
 
     })
 

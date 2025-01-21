@@ -6,7 +6,6 @@ import About from "../Pages/Home/About/About";
 import Registration from "../Pages/Registration/Registration";
 import Login from "../Pages/Login/Login";
 import Dashboard from "../Layouts/Dashboard";
-import DashboardInfo from "../Pages/Dashboard/Dashboard/DashboardInfo";
 import Blogs from "../Pages/Home/Blogs/Blogs";
 import BlogDetails from "../Pages/Home/BlogDetails/BlogDetails";
 import CreateDonationBlood from "../Pages/Dashboard/CreateDonationBlood/CreateDonationBlood";
@@ -19,6 +18,9 @@ import AllBloodDonationRequest from "../Pages/AdminDashboard/AllBloodDonationReq
 import AllBloodDonationReqVolunteer from "../Pages/VolunteerDashboard/AllBloodDonationReq/AllBloodDonationReqVolunteer";
 import ContentManagements from "../Pages/AdminDashboard/ContentManagement/ContentManagements";
 import AddBlog from "../Pages/AdminDashboard/AddBlog/AddBlog";
+import EditMyDonationRequest from "../Pages/Dashboard/EditMyDonationRequest/EditMyDonationRequest";
+import Dashboardinfo from "../Pages/Dashboard/Dashboard/Dashboardinfo";
+import Profile from "../Pages/Profile/Profile";
 
 export const router = createBrowserRouter([
 
@@ -72,8 +74,10 @@ export const router = createBrowserRouter([
         element: <PrivateRoutes><Dashboard></Dashboard></PrivateRoutes>,
         children: [
             {
-                path: "/dashboard/dashboardinfo",
-                element: <PrivateRoutes><DashboardInfo></DashboardInfo></PrivateRoutes>
+                path: "/dashboard",
+                element: <PrivateRoutes><Dashboardinfo></Dashboardinfo></PrivateRoutes>,
+                loader:async()=>fetch("http://localhost:5000/users"),
+                
             },
             {
                 path: "/dashboard/create-blood-donation",
@@ -84,26 +88,35 @@ export const router = createBrowserRouter([
                 element: <PrivateRoutes><MyDonationRequest></MyDonationRequest></PrivateRoutes>
             },
             {
-                path:"/dashboard/all-users",
-                element:<AllUser></AllUser>
+                path: "/dashboard/all-users",
+                element: <AllUser></AllUser>
             },
             {
-                path:"/dashboard/all-blood-donation-request",
-                element:<AllBloodDonationRequest></AllBloodDonationRequest>
+                path: "/dashboard/all-blood-donation-request",
+                element: <AllBloodDonationRequest></AllBloodDonationRequest>
             },
             {
-                path:"/dashboard/content-management",
-                element:<ContentManagements></ContentManagements>
+                path: "/dashboard/content-management",
+                element: <ContentManagements></ContentManagements>
             },
             {
-                path:"/dashboard/add-blog",
-                element:<AddBlog></AddBlog>
+                path: "/dashboard/add-blog",
+                element: <AddBlog></AddBlog>
             },
             {
-                path:"/dashboard/volunteer/all-blood-donation-request",
-                element:<AllBloodDonationReqVolunteer></AllBloodDonationReqVolunteer>
+                path: "/dashboard/volunteer/all-blood-donation-request",
+                element: <AllBloodDonationReqVolunteer></AllBloodDonationReqVolunteer>
             },
-           
+            {
+                path: "/dashboard/edit-donation-request/:id",
+                element: <EditMyDonationRequest></EditMyDonationRequest>,
+                loader: ({params}) => fetch(`http://localhost:5000/donation-request-details/${params.id}`)
+            },
+            {
+                path:"/dashboard/profile/:id",
+                element:<Profile></Profile>
+            }
+
         ]
     }
 ])

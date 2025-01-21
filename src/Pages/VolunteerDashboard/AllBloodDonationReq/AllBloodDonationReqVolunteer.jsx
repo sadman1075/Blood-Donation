@@ -10,22 +10,32 @@ import { format } from "date-fns";
 const AllBloodDonationReqVolunteer = () => {
     const [donationinfos, setDonationinfos] = useState(null)
     const { user } = useContext(AuthContext)
+    const [status, setStatus] = useState("")
 
-    const { data, isPending } = useQuery({
-        queryKey: ["donationinos"],
-        queryFn: async () => fetch("http://localhost:5000/all-donation-request")
+    const { data, refetch } = useQuery({
+        queryKey: ["donate",status],
+        queryFn: async () => fetch(`http://localhost:5000/all-donation-request?status=${status}`)
             .then(res => res.json())
             .then(data => setDonationinfos(data))
 
     })
+    // refetch()
 
-    if (isPending) {
-        return <Loader></Loader>
-    }
+
+
+
+    // const { sats } = useQuery({
+    //     queryKey: ["status"],
+    //     queryFn: async () => fetch(`http://localhost:5000/all-donation-request?status=${status}`)
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             console.log(data);
+    //         })
+    // })
 
     const handledonestatus = (id) => {
         console.log(id);
-        const { data, refetch } = useQuery({
+        const { data} = useQuery({
             queryKey: ["updates"],
             queryFn: axios.put(`http://localhost:5000/donation-request-done/${id}`)
                 .then(data => {
@@ -38,7 +48,7 @@ const AllBloodDonationReqVolunteer = () => {
     }
     const handlecalcelstatus = (id) => {
         console.log(id);
-        const { data, refetch } = useQuery({
+        const { data} = useQuery({
             queryKey: ["updates"],
             queryFn: axios.put(`http://localhost:5000/donation-request-cancel/${id}`)
                 .then(data => {
@@ -49,7 +59,7 @@ const AllBloodDonationReqVolunteer = () => {
     }
 
     const handlependingstatus = (id) => {
-        const { data, refetch } = useQuery({
+        const { data} = useQuery({
             queryKey: ["updates"],
             queryFn: axios.put(`http://localhost:5000/donation-request-pending/${id}`)
                 .then(data => {
@@ -60,7 +70,7 @@ const AllBloodDonationReqVolunteer = () => {
     }
 
     const handleUpdate = (id) => {
-        const { data, refetch } = useQuery({
+        const { data } = useQuery({
             queryKey: ["updates"],
             queryFn: axios.put(`http://localhost:5000/donation-request-details/${id}`)
                 .then(data => {
@@ -69,10 +79,23 @@ const AllBloodDonationReqVolunteer = () => {
         })
         refetch()
     }
+
+
     return (
         <div>
             <div>
                 <h1 className="mb-10 font-bold text-3xl lg:text-5xl text-center">All Blood Donation Request</h1>
+                <div className="mb-5">
+                   <p className="text-2xl font-bold p-3">Filter By Status</p>
+                    <select className="select select-ghost border-1 border-gray-300 bg-white w-full " onChange={(e) => setStatus(e.target.value)} required>
+                        <option selected disabled>Select status</option>
+                        <option value={""}>All</option>
+                        <option>pending</option>
+                        <option>inprogress</option>
+                        <option>done</option>
+                        <option>cancel</option>
+                    </select>
+                </div>
                 {
                     donationinfos?.length == 0 ? <p className="text-center font-bold  lg:text-5xl text-red-400 mb-10">Your are not create any blood donation request</p> :
 

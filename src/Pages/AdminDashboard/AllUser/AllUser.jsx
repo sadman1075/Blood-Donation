@@ -11,8 +11,8 @@ const AllUser = () => {
     const [status, setStatus] = useState("")
     const { data, isLoading, } = useQuery({
         queryKey: ["status", status],
-        queryFn: async()=>fetch(`http://localhost:5000/users?status=${status}`)
-        .then(res=>res.json())
+        queryFn: async () => fetch(`http://localhost:5000/users?status=${status}`)
+            .then(res => res.json())
             .then(data => setUsers(data))
 
     })
@@ -73,9 +73,11 @@ const AllUser = () => {
     return (
         <div>
             <h1 className="mb-10 font-bold text-3xl lg:text-5xl text-center">All Users</h1>
-            <div>
+            <div className="mb-5">
+                <p className="text-2xl font-bold p-3">Filter By Status</p>
                 <select className="select select-ghost border-1 border-gray-300 bg-white w-full " onChange={(e) => setStatus(e.target.value)} required>
                     <option disabled selected>Select status</option>
+                    <option value={""}>All</option>
                     <option>active</option>
                     <option>blocked</option>
                 </select>

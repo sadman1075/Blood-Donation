@@ -146,7 +146,7 @@ const CreateDonationBlood = () => {
                                     <span className="label-text">Blood Group</span>
                                 </label>
                                 <select name="blood_group" className="select select-bordered lg:w-[500px]" required>
-                                    <option disabled selected>A+</option>
+                                    <option  selected>A+</option>
                                     <option>A-</option>
                                     <option>B+</option>
                                     <option>B-</option>

@@ -8,7 +8,7 @@ import axios from 'axios';
 const ContextProvider = ({ children }) => {
     const [loading, setLoading] = useState(true)
     const [user, setUser] = useState(null)
-    const [duser, setDuser] = useState(null)
+    const [duser, setDuser] = useState('')
 
     // const { data } = useQuery({
     //     queryKey: ["duser"],

@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import { useContext } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import AuthContext from "../../Context/AuthContext";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 
 const AllDonationRequestDetails = () => {
     const alldonationinfo = useLoaderData();
+    const navigate=useNavigate()
     const { user } = useContext(AuthContext)
     const { _id, recipient, district, upozila, hospital_name, address, blood_group, date, time, message, name, email, status } = alldonationinfo
     const handleDonate = () => {
@@ -24,6 +25,25 @@ const AllDonationRequestDetails = () => {
                  toast.success("you have successfully submitted")
                 })
         })
+
+    }
+
+    const handleDonarInfo=(e)=>{
+        e.preventDefault();
+        const from=e.target;
+        const name=from.name.value;
+        const email=from.email.value;
+        const donar_id=_id
+        const donarinformation={
+            donar_id,
+            name,
+            email
+        }
+
+        axios.post("http://localhost:5000/donar-information",donarinformation)
+        .then(data=>console.log(data))
+
+        navigate(-1)
     }
 
     return (
@@ -47,20 +67,21 @@ const AllDonationRequestDetails = () => {
 
 
 
-                    <div className="card-actions justify-end">
-                        <button onClick={handleDonate} className="btn bg-black text-white">Donate Now</button>
+                    <div className="card-actions justify-between">
+                        <Link to={-1} className="btn bg-black text-white">Back</Link>
+                        <button onClick={handleDonate} className="btn bg-red-500 text-white">Donate Now</button>
                     </div>
                 </div>
             </div>
 
             <dialog id="my_modal_1" className="modal">
                 <div className="modal-box ">
-                    <h3 className="font-bold text-lg">Recover</h3>
+                    <h3 className="font-bold text-lg">Donar</h3>
                     <form method="dialog">
                         {/* if there is a button in form, it will close the modal */}
                         <button className="btn btn-lg btn-circle btn-ghost absolute text-red-500 right-2 top-2">✕</button>
                     </form>
-                    <form className="card-body" onSubmit={""}>
+                    <form className="card-body" onSubmit={handleDonarInfo}>
 
                         <div className="form-control ">
                             <label className="label">

@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { BiSolidDonateBlood } from "react-icons/bi";
 import { FaBloggerB, FaHome, FaUser } from "react-icons/fa";
 import { FcAbout } from "react-icons/fc";
-import { MdContactPage, MdDashboardCustomize, MdManageAccounts, MdRoundaboutLeft } from "react-icons/md";
+import { MdAdminPanelSettings, MdContactPage, MdDashboardCustomize, MdManageAccounts, MdRoundaboutLeft } from "react-icons/md";
 import { RiSidebarFoldFill } from "react-icons/ri";
 import { Link, Outlet } from "react-router-dom";
 import AuthContext from "../Context/AuthContext";
@@ -11,9 +11,10 @@ import { useQuery } from "@tanstack/react-query";
 import Loader from "../Pages/Loader/Loader";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { ImProfile } from "react-icons/im";
 
 const Dashboard = () => {
-    const { user,duser,logout } = useContext(AuthContext)
+    const { user, duser, logout } = useContext(AuthContext)
     const handleLogOut = () => {
         logout()
             .then(result => {
@@ -48,29 +49,36 @@ const Dashboard = () => {
                         {/* Sidebar content here */}
                         <div className="avatar flex justify-center mb-10">
                             <div className="w-12 rounded-full">
-                                <img src={user?.photoURL} />
+                                <img src={duser?.image} />
                             </div>
                         </div>
                         {
-                            duser.role==="Admin" ? <>
+                            duser.role === "Admin" ? <>
+                            
+                                <li><Link to={"/dashboard"}><MdDashboardCustomize />Dashboard</Link></li>
                                 <li><Link to={"/dashboard/all-users"}><FaUser />All Users</Link></li>
                                 <li><Link to={"/dashboard/all-blood-donation-request"}><BiSolidDonateBlood />All Blood Donation Request</Link></li>
                                 <li><Link to={"/dashboard/content-management"}><MdManageAccounts />Content Management</Link></li>
+                                <li><Link to={`/dashboard/profile/${duser?._id}`}><MdAdminPanelSettings />Profile</Link></li>
+
 
                             </>
                                 :
-                                duser.role==="volunteer" ?
+                                duser.role === "volunteer" ?
                                     <>
+                                        <li><Link to={"/dashboard"}><MdDashboardCustomize />Dashboard</Link></li>
                                         <li><Link to={"/dashboard/volunteer/all-blood-donation-request"}><BiSolidDonateBlood />All Blood Donation Request</Link></li>
                                         <li><Link to={"/dashboard/content-management"}><MdManageAccounts />Content Management</Link></li>
-
+                                        <li><Link to={`/dashboard/profile/${duser?._id}`}><MdAdminPanelSettings />Profile</Link></li>
 
                                     </>
                                     :
                                     <>
-                                        <li><Link to={"/dashboard/dashboardinfo"}><MdDashboardCustomize />Dashboard</Link></li>
+                                        <li><Link to={"/dashboard"}><MdDashboardCustomize />Dashboard</Link></li>
                                         <li><Link to={"/dashboard/my-donation-request"}><BiSolidDonateBlood />My Donation Request</Link></li>
                                         <li><Link to={"/dashboard/create-blood-donation"}><IoIosCreate />Create Donation Request</Link></li>
+                                        <li><Link to={`/dashboard/profile/${duser?._id}`}><MdAdminPanelSettings />Profile</Link></li>
+
 
                                     </>
                         }
@@ -83,7 +91,7 @@ const Dashboard = () => {
                             About</Link></li>
                         <li><Link to={"/contact"}><MdContactPage />Contact</Link></li>
                         <div className="mt-16">
-                            <Link className="btn bg-black text-white text-center w-full"onClick={handleLogOut}>Log out</Link>
+                            <Link className="btn bg-black text-white text-center w-full" onClick={handleLogOut}>Log out</Link>
                         </div>
 
                     </ul>

@@ -87,7 +87,11 @@ const Registration = () => {
                     name: name,
                     email: email,
                     image: photo,
-                    status: status
+                    status: status,
+                    blood_group: blood_group,
+                    district: district,
+                    upozila: upozila,
+
                 }
                 axiosPublic.post("/users", userinfo)
                     .then(res => {
@@ -146,7 +150,7 @@ const Registration = () => {
                                     <span className="label-text">Blood Group</span>
                                 </label>
                                 <select name="blood_group" className="select select-bordered w-full max-w-xs">
-                                    <option disabled selected>A+</option>
+                                    <option  selected>A+</option>
                                     <option>A-</option>
                                     <option>B+</option>
                                     <option>B-</option>

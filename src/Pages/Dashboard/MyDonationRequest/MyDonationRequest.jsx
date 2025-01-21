@@ -6,14 +6,15 @@ import AuthContext from "../../../Context/AuthContext";
 import Loader from "../../Loader/Loader";
 import { format } from "date-fns";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 
 const MyDonationRequest = () => {
     const [donationinfos, setDonationinfos] = useState(null)
     const { user } = useContext(AuthContext)
 
-    const { data, isPending } = useQuery({
-        queryKey: ["donation"],
+    const { data, isPending, refetch } = useQuery({
+        queryKey: ["donation", user?.email],
         queryFn: async () => fetch(`http://localhost:5000/my-donation-request?email=${user?.email}`)
             .then(res => res.json())
             .then(data => setDonationinfos(data))
@@ -24,9 +25,46 @@ const MyDonationRequest = () => {
         return <Loader></Loader>
     }
 
+    const handleDeleteRequest = (donationinfo) => {
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: `You won't be able to revert ${donationinfo.recipient}`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const { data } = useQuery({
+                    queryKey: ["deletedinfo"],
+                    queryFn: axios.delete(`http://localhost:5000/my-donation-request/${donationinfo?._id}`)
+                        .then(data => {
+                            if (data.data.deletedCount > 0) {
+                                Swal.fire({
+                                    title: "Deleted!",
+                                    text: "Your file has been deleted.",
+                                    icon: "success"
+                                });
+
+                                refetch()
+                            }
+                        })
+                })
+
+
+
+                    .catch(error => toast.error(error.message))
+
+            }
+        });
+
+    }
+
     const handledonestatus = (id) => {
         console.log(id);
-        const { data, refetch } = useQuery({
+        const { data } = useQuery({
             queryKey: ["updates"],
             queryFn: axios.put(`http://localhost:5000/donation-request-done/${id}`)
                 .then(data => {
@@ -39,7 +77,7 @@ const MyDonationRequest = () => {
     }
     const handlecalcelstatus = (id) => {
         console.log(id);
-        const { data, refetch } = useQuery({
+        const { data } = useQuery({
             queryKey: ["updates"],
             queryFn: axios.put(`http://localhost:5000/donation-request-cancel/${id}`)
                 .then(data => {
@@ -90,9 +128,9 @@ const MyDonationRequest = () => {
                                                     <Link onClick={() => handledonestatus(donationinfo._id)} className="btn ml-2 bg-green-500 text-white">Done</Link>
                                                     <Link onClick={() => handlecalcelstatus(donationinfo._id)} className="btn ml-2 bg-red-500 text-white">Cancel</Link>
                                                 </> : <>
-                                                    <Link className="btn  bg-yellow-500 text-white ">View</Link>
-                                                    <Link className="btn ml-2 bg-green-500 text-white">Edit</Link>
-                                                    <Link className="btn ml-2 bg-red-500 text-white">Delete</Link>
+                                                    <Link to={`/donation-request-details/${donationinfo._id}`} className="btn  bg-yellow-500 text-white ">View</Link>
+                                                    <Link to={`/dashboard/edit-donation-request/${donationinfo._id}`} className="btn ml-2 bg-green-500 text-white">Edit</Link>
+                                                    <Link onClick={()=>handleDeleteRequest(donationinfo)} className="btn ml-2 bg-red-500 text-white">Delete</Link>
                                                 </>
 
                                             }

@@ -12,7 +12,16 @@ const Dashboardinfo = () => {
     const [donationinfos, setDonationinfos] = useState(null)
     const { duser } = useContext(AuthContext)
     const { user } = useContext(AuthContext)
-    const totalUser = useLoaderData()
+    const [totalUser, setTotalUser] = useState()
+    const { data:users } = useQuery({
+        queryKey: ["users"],
+        queryFn: async () => fetch("http://localhost:5000/users")
+            .then(res => res.json())
+            .then(data => setTotalUser(data))
+
+    })
+
+    // const totalUser = useLoaderData()
     console.log(totalUser);
 
     const [totalDonationReq, setTotalDonationReq] = useState(null)
@@ -34,8 +43,6 @@ const Dashboardinfo = () => {
 
 
     })
-
-
 
     if (isPending) {
         return <Loader></Loader>

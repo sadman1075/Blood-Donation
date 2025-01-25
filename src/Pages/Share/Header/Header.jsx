@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { FaCartArrowDown } from "react-icons/fa";
 
 const Header = () => {
-    const { user, logout } = useContext(AuthContext)
+    const { user, duser, logout } = useContext(AuthContext)
     const handleLogOut = () => {
         logout()
             .then(result => {
@@ -23,6 +23,8 @@ const Header = () => {
         <li><Link to={"/blog"}>blog</Link></li>
         <li><Link to={"/About"}>About</Link></li>
         <li><Link to={"/contact"}>Contact</Link></li>
+        <li><Link to={"/search"}>Search</Link></li>
+        <li><Link to={"/funding"}>Funding</Link></li>
 
 
 

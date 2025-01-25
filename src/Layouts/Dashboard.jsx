@@ -49,7 +49,7 @@ const Dashboard = () => {
                         {/* Sidebar content here */}
                         <div className="avatar flex justify-center mb-10">
                             <div className="w-12 rounded-full">
-                                <img src={duser?.image} />
+                                <img src={user?.photoURL} />
                             </div>
                         </div>
                         {
@@ -91,7 +91,7 @@ const Dashboard = () => {
                             About</Link></li>
                         <li><Link to={"/contact"}><MdContactPage />Contact</Link></li>
                         <div className="mt-16">
-                            <Link className="btn bg-black text-white text-center w-full" onClick={handleLogOut}>Log out</Link>
+                            <Link className="btn bg-red-500 text-white text-center w-full" onClick={handleLogOut}>Log out</Link>
                         </div>
 
                     </ul>

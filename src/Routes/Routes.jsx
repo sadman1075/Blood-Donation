@@ -21,6 +21,9 @@ import AddBlog from "../Pages/AdminDashboard/AddBlog/AddBlog";
 import EditMyDonationRequest from "../Pages/Dashboard/EditMyDonationRequest/EditMyDonationRequest";
 import Dashboardinfo from "../Pages/Dashboard/Dashboard/Dashboardinfo";
 import Profile from "../Pages/Profile/Profile";
+import Search from "../Pages/Search/Search";
+import Funding from "../Pages/Funding/Funding";
+import AddFunding from "../Pages/AddFunding/AddFunding";
 
 export const router = createBrowserRouter([
 
@@ -66,6 +69,18 @@ export const router = createBrowserRouter([
                 element: <PrivateRoutes><AllDonationRequestDetails></AllDonationRequestDetails></PrivateRoutes>,
                 loader: ({ params }) => fetch(`http://localhost:5000/donation-request-details/${params.id}`)
 
+            },
+            {
+                path: "/search",
+                element: <Search></Search>
+            },
+            {
+                path: "/funding",
+                element: <PrivateRoutes><Funding></Funding></PrivateRoutes>
+            },
+            {
+                path: "/add-funding",
+                element: <PrivateRoutes><AddFunding></AddFunding></PrivateRoutes>
             }
         ]
     },
@@ -75,17 +90,16 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: "/dashboard",
-                element: <PrivateRoutes><Dashboardinfo></Dashboardinfo></PrivateRoutes>,
-                loader:async()=>fetch("http://localhost:5000/users"),
-                
+                element: <Dashboardinfo></Dashboardinfo>,
+
             },
             {
                 path: "/dashboard/create-blood-donation",
-                element: <PrivateRoutes><CreateDonationBlood></CreateDonationBlood></PrivateRoutes>
+                element: <CreateDonationBlood></CreateDonationBlood>
             },
             {
                 path: "/dashboard/my-donation-request",
-                element: <PrivateRoutes><MyDonationRequest></MyDonationRequest></PrivateRoutes>
+                element: <MyDonationRequest></MyDonationRequest>
             },
             {
                 path: "/dashboard/all-users",
@@ -110,11 +124,11 @@ export const router = createBrowserRouter([
             {
                 path: "/dashboard/edit-donation-request/:id",
                 element: <EditMyDonationRequest></EditMyDonationRequest>,
-                loader: ({params}) => fetch(`http://localhost:5000/donation-request-details/${params.id}`)
+                loader: ({ params }) => fetch(`http://localhost:5000/donation-request-details/${params.id}`)
             },
             {
-                path:"/dashboard/profile/:id",
-                element:<Profile></Profile>
+                path: "/dashboard/profile/:id",
+                element: <Profile></Profile>
             }
 
         ]

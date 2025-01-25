@@ -12,7 +12,7 @@ const Registration = () => {
     const [districts, setdistricts] = useState(null)
     const [upozilas, setupozilas] = useState(null)
     const navigate = useNavigate()
-    const { googleCreateUser, createUser, updateProfileuser, setUser } = useContext(AuthContext)
+    const { googleCreateUser, createUser, updateProfileuser, setUser, setLoading } = useContext(AuthContext)
     const axiosPublic = useUserhooks()
     useEffect(() => {
         fetch("/district.json")
@@ -80,8 +80,11 @@ const Registration = () => {
                 updateProfileuser({ displayName: name, photoURL: photo })
                     .then(result => {
                         setUser((previoususer) => {
+
                             return { ...previoususer, displayName: name, photoURL: photo }
+
                         })
+                        setLoading(false)
                     })
                 const userinfo = {
                     name: name,
@@ -150,7 +153,7 @@ const Registration = () => {
                                     <span className="label-text">Blood Group</span>
                                 </label>
                                 <select name="blood_group" className="select select-bordered w-full max-w-xs">
-                                    <option  selected>A+</option>
+                                    <option selected>A+</option>
                                     <option>A-</option>
                                     <option>B+</option>
                                     <option>B-</option>

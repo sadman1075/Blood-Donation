@@ -13,7 +13,7 @@ const AllBloodDonationReqVolunteer = () => {
     const [status, setStatus] = useState("")
 
     const { data, refetch } = useQuery({
-        queryKey: ["donate",status],
+        queryKey: ["donate", status],
         queryFn: async () => fetch(`http://localhost:5000/all-donation-request?status=${status}`)
             .then(res => res.json())
             .then(data => setDonationinfos(data))
@@ -35,7 +35,7 @@ const AllBloodDonationReqVolunteer = () => {
 
     const handledonestatus = (id) => {
         console.log(id);
-        const { data} = useQuery({
+        const { data } = useQuery({
             queryKey: ["updates"],
             queryFn: axios.put(`http://localhost:5000/donation-request-done/${id}`)
                 .then(data => {
@@ -48,7 +48,7 @@ const AllBloodDonationReqVolunteer = () => {
     }
     const handlecalcelstatus = (id) => {
         console.log(id);
-        const { data} = useQuery({
+        const { data } = useQuery({
             queryKey: ["updates"],
             queryFn: axios.put(`http://localhost:5000/donation-request-cancel/${id}`)
                 .then(data => {
@@ -59,7 +59,7 @@ const AllBloodDonationReqVolunteer = () => {
     }
 
     const handlependingstatus = (id) => {
-        const { data} = useQuery({
+        const { data } = useQuery({
             queryKey: ["updates"],
             queryFn: axios.put(`http://localhost:5000/donation-request-pending/${id}`)
                 .then(data => {
@@ -86,7 +86,7 @@ const AllBloodDonationReqVolunteer = () => {
             <div>
                 <h1 className="mb-10 font-bold text-3xl lg:text-5xl text-center">All Blood Donation Request</h1>
                 <div className="mb-5">
-                   <p className="text-2xl font-bold p-3">Filter By Status</p>
+                    <p className="text-2xl font-bold p-3">Filter By Status</p>
                     <select className="select select-ghost border-1 border-gray-300 bg-white w-full " onChange={(e) => setStatus(e.target.value)} required>
                         <option selected disabled>Select status</option>
                         <option value={""}>All</option>

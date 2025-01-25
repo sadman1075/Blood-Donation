@@ -10,7 +10,8 @@ import toast from "react-hot-toast";
 const AllDonationRequestDetails = () => {
     const alldonationinfo = useLoaderData();
     const navigate=useNavigate()
-    const { user } = useContext(AuthContext)
+    const { user,duser } = useContext(AuthContext)
+    
     const { _id, recipient, district, upozila, hospital_name, address, blood_group, date, time, message, name, email, status } = alldonationinfo
     const handleDonate = () => {
         document.getElementById('my_modal_1').showModal()
@@ -34,10 +35,15 @@ const AllDonationRequestDetails = () => {
         const name=from.name.value;
         const email=from.email.value;
         const donar_id=_id
+        const district=duser.district;
+        const upozila=duser.upozila
         const donarinformation={
             donar_id,
             name,
-            email
+            email,
+            blood_group,
+            district,
+            upozila
         }
 
         axios.post("http://localhost:5000/donar-information",donarinformation)

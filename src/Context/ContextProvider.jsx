@@ -19,6 +19,7 @@ const ContextProvider = ({ children }) => {
 
     useEffect(() => {
         axios.get(`http://localhost:5000/user?email=${user?.email}`)
+   
             .then(data => setDuser(data.data))
     }, [user?.email])
 
@@ -48,17 +49,19 @@ const ContextProvider = ({ children }) => {
         setLoading(true)
         return signOut(auth)
     }
+    console.log(loading)
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser)
+            console.log(currentUser)
             setLoading(false);
         })
         return () => unsubscribe()
     }, [])
 
 
-    const authInfo = { loading, user, duser, googleCreateUser, createUser, loginUser, logout, updateProfileuser, setUser }
+    const authInfo = { setLoading,loading, user, duser, googleCreateUser, createUser, loginUser, logout, updateProfileuser, setUser }
     return (
         <div>
             <AuthContext.Provider value={authInfo}>

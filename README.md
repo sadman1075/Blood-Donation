@@ -1,8 +1,16 @@
-# React + Vite
+Blood Donation
+A blood donation website is a platform designed to connect blood donors, recipients, and organizations (such as hospitals or blood banks) to streamline the blood donation process. Currently, two official plugins are available:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Key Features of a Blood Donation Website
+User Registration and Login:
 
-Currently, two official plugins are available:
+Separate profiles for donors, recipients, and organizations. Option to track donation history and eligibility for the next donation. Blood Donor Search:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Filters based on blood type, location, and availability. Display verified donor profiles with contact information. Request Blood:
+
+Form to request blood during emergencies. Notifications or alerts to nearby donors. Blood Donation Events:
+
+Details about upcoming blood drives or donation camps. Option to register as a participant.
+
+Technology Stack for Development
+Frontend: HTML, CSS, JavaScript, React.js. Backend: Node.js,express js. Database: MongoDB.

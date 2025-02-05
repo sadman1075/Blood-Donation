@@ -18,5 +18,27 @@ Details about upcoming blood drives or donation camps. Option to register as a p
 <li>Database: MongoDB.</li>
 <li>Authentication:Firebase</li>
 
+## Core Features:
+<li>✔️ User Registration & Authentication
+</li>
+<li>✔️ Donor & Recipient Matching System
+</li>
+<li>✔️ Blood Group & Location-Based Search
+</li>
+<li>✔️ Request & Donate Blood Functionality
+</li>
+<li>✔️ Real-time Availability Tracking
+</li>
+
+## Dependencies
+<li>Ensure you have Node.js installed</li>
+<li>Ensure React is Installed</li>
+
+## How to Run Locally
+<li>1️⃣ Clone the repository</li>
+<li>2️⃣ Navigate to the project directory</li>
+<li>3️⃣ Install dependencies</li>
+<li>4️⃣ Start the development server</li>
+
 ## Live Link:
 ## https://blood-donation-104f7.web.app/

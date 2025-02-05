@@ -13,6 +13,10 @@ Form to request blood during emergencies. Notifications or alerts to nearby dono
 Details about upcoming blood drives or donation camps. Option to register as a participant.
 
 ## Technology Stack for Development
-Frontend: HTML, CSS, JavaScript, React.js. Backend: Node.js,express js. Database: MongoDB.
+<li>Frontend: HTML, CSS, JavaScript, React.js.</li> 
+<li>Backend: Node.js,express js</li>
+<li>Database: MongoDB.</li>
+<li>Authentication:Firebase</li>
+
 ## Live Link:
 ## https://blood-donation-104f7.web.app/

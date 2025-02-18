@@ -20,7 +20,7 @@ const About = () => {
                           
                                 It includes features like user registration for donors and recipients, search and filter options to locate nearby donors or blood banks based on blood type and location, and a request management module for urgent blood requirements. Additionally, the platform integrates geolocation for mapping nearby resources and notification systems to inform users about donation opportunities or urgent needs. Targeting individuals, hospitals, and blood banks, our project seeks to raise awareness about the importance of blood donation while ensuring transparency and accountability in the process. Currently, the project is [insert your project's phase: planning, development, or deployment], and we are focused on building a user-friendly, secure, and impactful system to promote community health and well-being.
                             </p>
-                            <Link to={"/lost-and-found"} className="btn bg-black text-white  mt-3">Donation Blood</Link>
+                            <Link to={"/donation-request"} className="btn bg-black text-white  mt-3">Donation Blood</Link>
                         </div>
                     </div>
                 </div>

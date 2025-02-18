@@ -103,7 +103,7 @@ const Dashboard = () => {
                                     </>
                         }
 
-                        <div className="divide"></div>
+                        <div className="divider"></div>
                         <li><Link to={"/"}><FaHome />Home</Link></li>
                         <li><Link to={"/donation-request"}><BiSolidDonateBlood />Donation Requests</Link></li>
                         <li><Link to={"/blog"}><FaBloggerB />blog</Link></li>

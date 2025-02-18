@@ -40,7 +40,7 @@ const LatestDonationRequest = ({ donationRequest }) => {
                         <p className="text-lg">{format(new Date(date), "P")}</p>
                     </div>
                     <div className="card-actions justify-end">
-                        <Link to={`/details/${_id}`} className="btn bg-black text-white">See Details</Link>
+                        <Link to={`/donation-request-details/${_id}`} className="btn bg-black text-white">See Details</Link>
                     </div>
                 </div>
             </div>

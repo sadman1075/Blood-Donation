@@ -13,20 +13,22 @@ const Dashboardinfo = () => {
     const { duser } = useContext(AuthContext)
     const { user } = useContext(AuthContext)
     const [totalUser, setTotalUser] = useState()
-    const { data:users } = useQuery({
+    const [amount, setAmount] = useState(0)
+
+    const { data: users } = useQuery({
         queryKey: ["users"],
-        queryFn: async () => fetch("http://localhost:5000/users")
+        queryFn: async () => fetch("https://blood-donation-server-hazel-gamma.vercel.app/users")
             .then(res => res.json())
             .then(data => setTotalUser(data))
 
     })
 
     // const totalUser = useLoaderData()
-    console.log(totalUser);
+
 
     const [totalDonationReq, setTotalDonationReq] = useState(null)
     useEffect(() => {
-        fetch("http://localhost:5000/all-donation-request")
+        fetch("https://blood-donation-server-hazel-gamma.vercel.app/all-donation-request")
             .then(res => res.json())
             .then(data => setTotalDonationReq(data))
     }, [])
@@ -36,7 +38,7 @@ const Dashboardinfo = () => {
     const { data, isPending, refetch } = useQuery({
         queryKey: ["donationinos", user?.email],
         queryFn: async () => {
-            fetch(`http://localhost:5000/my-latest-donation-request?email=${user?.email}`)
+            fetch(`https://blood-donation-server-hazel-gamma.vercel.app/my-latest-donation-request?email=${user?.email}`)
                 .then(res => res.json())
                 .then(data => setDonationinfos(data))
         }
@@ -62,7 +64,7 @@ const Dashboardinfo = () => {
             if (result.isConfirmed) {
                 const { data } = useQuery({
                     queryKey: ["deletedinfo"],
-                    queryFn: axios.delete(`http://localhost:5000/my-donation-request/${donationinfo?._id}`)
+                    queryFn: axios.delete(`https://blood-donation-server-hazel-gamma.vercel.app/my-donation-request/${donationinfo?._id}`)
                         .then(data => {
                             if (data.data.deletedCount > 0) {
                                 Swal.fire({
@@ -87,10 +89,9 @@ const Dashboardinfo = () => {
 
 
     const handledonestatus = (id) => {
-        console.log(id);
         const { data } = useQuery({
             queryKey: ["updates"],
-            queryFn: axios.put(`http://localhost:5000/donation-request-done/${id}`)
+            queryFn: axios.put(`https://blood-donation-server-hazel-gamma.vercel.app/donation-request-done/${id}`)
                 .then(data => {
                     toast.success("you have successfully submitted")
                 })
@@ -100,10 +101,9 @@ const Dashboardinfo = () => {
 
     }
     const handlecalcelstatus = (id) => {
-        console.log(id);
         const { data } = useQuery({
             queryKey: ["updates"],
-            queryFn: axios.put(`http://localhost:5000/donation-request-cancel/${id}`)
+            queryFn: axios.put(`https://blood-donation-server-hazel-gamma.vercel.app/donation-request-cancel/${id}`)
                 .then(data => {
                     toast.success("you have successfully submitted")
                 })
@@ -133,8 +133,8 @@ const Dashboardinfo = () => {
                             </div>
 
                             <div className="stat place-items-center lg:p-10">
-                                <div className="stat-title">New Registers</div>
-                                <div className="stat-value">1,200</div>
+                                <div className="stat-title">total funding</div>
+                                <div className="stat-value">1546</div>
                                 <div className="stat-desc">↘︎ 90 (14%)</div>
                             </div>
                         </div>
@@ -155,7 +155,7 @@ const Dashboardinfo = () => {
 
                                 <div className="stat place-items-center lg:p-10">
                                     <div className="stat-title">New Registers</div>
-                                    <div className="stat-value">1,200</div>
+                                    <div className="stat-value">1546</div>
                                     <div className="stat-desc">↘︎ 90 (14%)</div>
                                 </div>
                             </div>

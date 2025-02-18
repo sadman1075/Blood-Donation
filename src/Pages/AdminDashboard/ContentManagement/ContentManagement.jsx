@@ -6,38 +6,31 @@ import { Link } from "react-router-dom";
 import Loader from "../../Loader/Loader";
 import { useContext } from "react";
 import AuthContext from "../../../Context/AuthContext";
+import Swal from "sweetalert2";
 
-const ContentManagement = ({ blog }) => {
+const ContentManagement = ({ blog, publishupdate, unpublishupdate, deleteupdate }) => {
     const { _id, image, author, title, date, status } = blog
     const { duser } = useContext(AuthContext)
 
 
 
     const handlePublishStatus = (id) => {
-
-        const { data } = useQuery({
-            queryKey: ["blog-publish"],
-            queryFn: axios.put(`http://localhost:5000/blog-publish/${id}`)
-                .then(data => console.log(data.data))
-        })
+        publishupdate(id)
 
     }
+
+
     const handleUnpublishstatus = (id) => {
 
-        const { data } = useQuery({
-            queryKey: ["blog-unpublish"],
-            queryFn: axios.put(`http://localhost:5000/blog-unpublish/${id}`)
-                .then(data => console.log(data.data))
-        })
+        unpublishupdate(id)
 
     }
 
     const handleBlogDelete = (id) => {
-        const { data } = useQuery({
-            queryKey: ["blog-delete"],
-            queryFn: axios.delete(`http://localhost:5000/blog/${id}`)
-                .then(data => console.log(data.data))
-        })
+
+        deleteupdate(id)
+
+
     }
 
     return (

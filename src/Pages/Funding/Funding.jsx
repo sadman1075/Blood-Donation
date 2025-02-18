@@ -4,14 +4,18 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Funding = () => {
-    const [paymentInfos,setPaymentInfos]=useState()
-    const {data}=useQuery({
-        queryKey:["payment"],
-        queryFn:async()=>fetch("http://localhost:5000/payment")
-        .then(res=>res.json())
-        .then(data=>setPaymentInfos(data))
+    const [paymentInfos, setPaymentInfos] = useState(null)
+    const { data } = useQuery({
+        queryKey: ["payment"],
+        queryFn: async () => fetch("https://blood-donation-server-hazel-gamma.vercel.app/payment", {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('access-token')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => setPaymentInfos(data))
     })
-  
+
     return (
         <div>
             <div className="pt-20 lg:pt-32">
@@ -40,10 +44,10 @@ const Funding = () => {
 
 
                                         <td>{paymentInfo.name}</td>
-                                        <td>$ {paymentInfo.amount/100} </td>
+                                        <td>$ {paymentInfo.amount / 100} </td>
                                         <td>{format(new Date(paymentInfo.date), "P")}</td>
-                                   
-                                      
+
+
 
                                     </tr>)
                                 }

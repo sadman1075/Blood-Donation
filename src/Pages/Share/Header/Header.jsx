@@ -4,8 +4,9 @@ import { useContext } from "react";
 import AuthContext from "../../../Context/AuthContext";
 import toast from "react-hot-toast";
 import { FaCartArrowDown } from "react-icons/fa";
+import { MdDarkMode, MdOutlineDarkMode } from "react-icons/md";
 
-const Header = () => {
+const Header = ({ active, handleMode }) => {
     const { user, duser, logout } = useContext(AuthContext)
     const handleLogOut = () => {
         logout()
@@ -19,12 +20,16 @@ const Header = () => {
 
     const navOptions = <>
         <li><Link to={"/"}>Home</Link></li>
-        <li><Link to={"/donation-request"}>Donation Requests</Link></li>
         <li><Link to={"/blog"}>blog</Link></li>
         <li><Link to={"/About"}>About</Link></li>
         <li><Link to={"/contact"}>Contact</Link></li>
         <li><Link to={"/search"}>Search</Link></li>
-        <li><Link to={"/funding"}>Funding</Link></li>
+        {
+            user ? <>
+                <li><Link to={"/donation-request"}>Donation Requests</Link></li>
+                <li><Link to={"/funding"}>Funding</Link></li>
+            </> : ""
+        }
 
 
 
@@ -68,6 +73,13 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className="navbar-end gap-4 ">
+                    <div className="mr-4">
+                        {
+                            active.status ? <Link className="text-3xl" onClick={() => handleMode("dark")} ><MdDarkMode />
+                            </Link> : <Link className="text-3xl" onClick={() => handleMode("light")} ><MdOutlineDarkMode />
+                            </Link>
+                        }
+                    </div>
                     {
                         user ? <>
 

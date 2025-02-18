@@ -4,7 +4,7 @@ import Blog from "../Blog/Blog";
 const Blogs = () => {
     const [blogs, setBlogs] = useState(null)
     useEffect(() => {
-        fetch("http://localhost:5000/specific-blog")
+        fetch("https://blood-donation-server-hazel-gamma.vercel.app/specific-blog")
             .then(res => res.json())
             .then(data => {
                 setBlogs(data)
@@ -12,7 +12,7 @@ const Blogs = () => {
     }, [])
     return (
         <div className="pt-20 lg:pt-32">
-            <h1 className="text-5xl font-bold text-center mb-20">Blogs</h1>
+            <h1 className="text-3xl lg:text-5xl font-bold text-center mb-20">Blogs</h1>
 
             <div className=" grid lg:grid-cols-3 md:grid-cols-2 gap-4">
                 {

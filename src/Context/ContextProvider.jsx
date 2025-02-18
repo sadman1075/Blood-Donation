@@ -12,14 +12,14 @@ const ContextProvider = ({ children }) => {
 
     // const { data } = useQuery({
     //     queryKey: ["duser"],
-    //     queryFn: axios.get(`http://localhost:5000/user?email=${user?.email}`)
+    //     queryFn: axios.get(`https://blood-donation-server-hazel-gamma.vercel.app/user?email=${user?.email}`)
     //         .then(data => setDuser(data.data))
     // })
 
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/user?email=${user?.email}`)
-   
+        axios.get(`https://blood-donation-server-hazel-gamma.vercel.app/user?email=${user?.email}`)
+
             .then(data => setDuser(data.data))
     }, [user?.email])
 
@@ -54,6 +54,19 @@ const ContextProvider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser)
+            if (currentUser) {
+                const userInfo = { email: currentUser.email }
+                axios.post('https://blood-donation-server-hazel-gamma.vercel.app/jwt', userInfo)
+                    .then(res => {
+                        if (res.data.token) {
+                            localStorage.setItem("access-token", res.data.token)
+                        }
+                    })
+            }
+            else {
+                //do
+                localStorage.removeItem("access-token")
+            }
             console.log(currentUser)
             setLoading(false);
         })
@@ -61,7 +74,7 @@ const ContextProvider = ({ children }) => {
     }, [])
 
 
-    const authInfo = { setLoading,loading, user, duser, googleCreateUser, createUser, loginUser, logout, updateProfileuser, setUser }
+    const authInfo = { setLoading, loading, user, duser, googleCreateUser, createUser, loginUser, logout, updateProfileuser, setUser }
     return (
         <div>
             <AuthContext.Provider value={authInfo}>

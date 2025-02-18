@@ -9,9 +9,9 @@ import toast from "react-hot-toast";
 
 const AllDonationRequestDetails = () => {
     const alldonationinfo = useLoaderData();
-    const navigate=useNavigate()
-    const { user,duser } = useContext(AuthContext)
-    
+    const navigate = useNavigate()
+    const { user, duser } = useContext(AuthContext)
+
     const { _id, recipient, district, upozila, hospital_name, address, blood_group, date, time, message, name, email, status } = alldonationinfo
     const handleDonate = () => {
         document.getElementById('my_modal_1').showModal()
@@ -21,23 +21,23 @@ const AllDonationRequestDetails = () => {
     const handlestatus = () => {
         const { data } = useQuery({
             queryKey: ["updates"],
-            queryFn: axios.put(`http://localhost:5000/donation-request-details/${_id}`)
+            queryFn: axios.put(`https://blood-donation-server-hazel-gamma.vercel.app/donation-request-details/${_id}`)
                 .then(data => {
-                 toast.success("you have successfully submitted")
+                    toast.success("you have successfully submitted")
                 })
         })
 
     }
 
-    const handleDonarInfo=(e)=>{
+    const handleDonarInfo = (e) => {
         e.preventDefault();
-        const from=e.target;
-        const name=from.name.value;
-        const email=from.email.value;
-        const donar_id=_id
-        const district=duser.district;
-        const upozila=duser.upozila
-        const donarinformation={
+        const from = e.target;
+        const name = from.name.value;
+        const email = from.email.value;
+        const donar_id = _id
+        const district = duser.district;
+        const upozila = duser.upozila
+        const donarinformation = {
             donar_id,
             name,
             email,
@@ -46,8 +46,8 @@ const AllDonationRequestDetails = () => {
             upozila
         }
 
-        axios.post("http://localhost:5000/donar-information",donarinformation)
-        .then(data=>console.log(data))
+        axios.post("https://blood-donation-server-hazel-gamma.vercel.app/donar-information", donarinformation)
+            .then(data => console.log(data))
 
         navigate(-1)
     }

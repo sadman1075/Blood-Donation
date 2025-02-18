@@ -14,7 +14,7 @@ const Search = () => {
 
     const handleSearch = () => {
         console.log("me");
-        axios.get(`http://localhost:5000/donar-information?blood_group=${blood_group}&district=${district}&upozila=${upozila}`)
+        axios.get(`https://blood-donation-server-hazel-gamma.vercel.app/donar-information?blood_group=${blood_group}&district=${district}&upozila=${upozila}`)
             .then(data => setAllInformation(data.data))
     }
 
@@ -103,7 +103,7 @@ const Search = () => {
                                             <td>{donationinfo.district}</td>
                                             <td>{donationinfo.upozila}</td>
 
-                              
+
                                         </tr>)
                                     }
 

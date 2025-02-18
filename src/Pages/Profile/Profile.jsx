@@ -45,7 +45,7 @@ const Profile = () => {
 
         const { data } = useQuery({
             queryKey: ["users"],
-            queryFn: axios.put(`http://localhost:5000/users/${_id}`, updateInfo)
+            queryFn: axios.put(`https://blood-donation-server-hazel-gamma.vercel.app/users/${_id}`, updateInfo)
                 .then(data => {
                     if (data.data.acknowledged) {
                         Swal.fire({
@@ -91,7 +91,7 @@ const Profile = () => {
                                     <label className="label">
                                         <span className="label-text">Name</span>
                                     </label>
-                                    <input type="text" defaultValue={name} name="name" readOnly value={name} className="input input-bordered lg:w-[500px]" required />
+                                    <input type="text" defaultValue={name} name="name" value={name} className="input input-bordered lg:w-[500px]" required />
 
                                 </div>
                             </div>
@@ -133,7 +133,7 @@ const Profile = () => {
                                             <option>O+</option>
                                             <option>O-</option>
                                         </select> :
-                                          <input type="text" readOnly defaultValue={blood_group} name="blood_group" className="input input-bordered lg:w-[500px]" required />
+                                            <input type="text" readOnly defaultValue={blood_group} name="blood_group" className="input input-bordered lg:w-[500px]" required />
 
                                     }
 

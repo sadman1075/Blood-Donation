@@ -12,7 +12,7 @@ const AllDonationRequest = () => {
 
     const { data, isPending } = useQuery({
         queryKey: ["donationinos"],
-        queryFn: axios.get("http://localhost:5000/donation-request")
+        queryFn: axios.get("https://blood-donation-server-hazel-gamma.vercel.app/donation-request")
             .then(data => setDonationinfos(data.data))
     })
     if (isPending) {
@@ -54,7 +54,7 @@ const AllDonationRequest = () => {
 
                                         <td className="flex">
                                             <Link to={`/donation-request-details/${donationinfo._id}`} className="btn  bg-yellow-500 text-white ">View</Link>
-                                           
+
                                         </td>
                                     </tr>)
                                 }

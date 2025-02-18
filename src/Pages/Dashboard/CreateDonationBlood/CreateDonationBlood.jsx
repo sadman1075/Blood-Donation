@@ -12,7 +12,7 @@ const CreateDonationBlood = () => {
     const [upozilas, setupozilas] = useState(null)
     const [startDate, setStartDate] = useState(new Date());
     const ms = startDate.getTime();
-   
+
 
 
     const { user } = useContext(AuthContext)
@@ -51,7 +51,7 @@ const CreateDonationBlood = () => {
 
         const { data } = useQuery({
             queryKey: ["donationinfos"],
-            queryFn: axios.post("http://localhost:5000/donation-request", donationInfo)
+            queryFn: axios.post("https://blood-donation-server-hazel-gamma.vercel.app/donation-request", donationInfo)
                 .then(data => {
                     if (data.data.acknowledged) {
                         Swal.fire({
@@ -146,7 +146,7 @@ const CreateDonationBlood = () => {
                                     <span className="label-text">Blood Group</span>
                                 </label>
                                 <select name="blood_group" className="select select-bordered lg:w-[500px]" required>
-                                    <option  selected>A+</option>
+                                    <option selected>A+</option>
                                     <option>A-</option>
                                     <option>B+</option>
                                     <option>B-</option>

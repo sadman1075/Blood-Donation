@@ -5,6 +5,7 @@ import AuthContext from "../../Context/AuthContext";
 import toast from "react-hot-toast";
 import { useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const CheckOutFrom = () => {
     const { user } = useContext(AuthContext)
@@ -12,13 +13,14 @@ const CheckOutFrom = () => {
     const [funding, setFunding] = useState(0)
     const [clientSecret, setClientSecret] = useState("")
     console.log(clientSecret);
+    const navigate=useNavigate()
 
     const stripe = useStripe();
     const elements = useElements();
 
     useEffect(() => {
         if (funding > 0) {
-            axios.post("http://localhost:5000/create-payment-intent", { price: funding })
+            axios.post("https://blood-donation-server-hazel-gamma.vercel.app/create-payment-intent", { price: funding })
                 .then(res => {
                     console.log(res.data.clientSecret);
                     setClientSecret(res.data.clientSecret)
@@ -81,11 +83,13 @@ const CheckOutFrom = () => {
                     date: paymentIntent.created,
                 }
 
-                axios.post("http://localhost:5000/payment", payment)
+                axios.post("https://blood-donation-server-hazel-gamma.vercel.app/payment", payment)
                     .then(res => {
                         console.log(res.data)
                         if (res.data.acknowledged) {
-                            toast.success("transaction successful.transaction id")
+                            toast.success("transaction successful")
+                            navigate(-1)
+                            
                         }
                     })
 
@@ -147,7 +151,7 @@ const CheckOutFrom = () => {
                     />
                 </div>
                 <div className="flex justify-center">
-                    <button className="bg-black text-white btn w-full lg:w-[500px] " type="submit" disabled={!stripe || !clientSecret}>
+                    <button  className="bg-black text-white btn w-full lg:w-[500px] " type="submit" disabled={!stripe || !clientSecret}>
                         Pay
                     </button>
                 </div>

@@ -58,7 +58,7 @@ export const router = createBrowserRouter([
             {
                 path: "/blog-details/:id",
                 element: <PrivateRoutes><BlogDetails></BlogDetails></PrivateRoutes>,
-                loader: ({ params }) => fetch(`http://localhost:5000/blog/${params.id}`)
+                loader: ({ params }) => fetch(`https://blood-donation-server-hazel-gamma.vercel.app/blog/${params.id}`)
             },
             {
                 path: "/donation-request",
@@ -67,7 +67,7 @@ export const router = createBrowserRouter([
             {
                 path: "/donation-request-details/:id",
                 element: <PrivateRoutes><AllDonationRequestDetails></AllDonationRequestDetails></PrivateRoutes>,
-                loader: ({ params }) => fetch(`http://localhost:5000/donation-request-details/${params.id}`)
+                loader: ({ params }) => fetch(`https://blood-donation-server-hazel-gamma.vercel.app/donation-request-details/${params.id}`)
 
             },
             {
@@ -124,7 +124,7 @@ export const router = createBrowserRouter([
             {
                 path: "/dashboard/edit-donation-request/:id",
                 element: <EditMyDonationRequest></EditMyDonationRequest>,
-                loader: ({ params }) => fetch(`http://localhost:5000/donation-request-details/${params.id}`)
+                loader: ({ params }) => fetch(`https://blood-donation-server-hazel-gamma.vercel.app/donation-request-details/${params.id}`)
             },
             {
                 path: "/dashboard/profile/:id",

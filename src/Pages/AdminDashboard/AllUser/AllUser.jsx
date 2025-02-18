@@ -5,70 +5,170 @@ import { Link } from "react-router-dom";
 import Loader from "../../Loader/Loader";
 import toast from "react-hot-toast";
 import { useMutation } from '@tanstack/react-query';
+import Swal from "sweetalert2";
 
 const AllUser = () => {
     const [users, setUsers] = useState(null)
     const [status, setStatus] = useState("")
-    const { data, isLoading, } = useQuery({
+    const { data, isPending, refetch } = useQuery({
         queryKey: ["status", status],
-        queryFn: async () => fetch(`http://localhost:5000/users?status=${status}`)
+        queryFn: async () => fetch(`https://blood-donation-server-hazel-gamma.vercel.app/users?status=${status}`)
             .then(res => res.json())
             .then(data => setUsers(data))
 
     })
 
 
-
+    if (isPending) {
+        return <Loader></Loader>
+    }
     const handleStatusBlock = (id) => {
-        const { data, refetch } = useQuery({
-            queryKey: ["updates"],
-            queryFn: axios.put(`http://localhost:5000/users-block/${id}`)
-                .then(data => {
-                    toast.success("you have successfully submitted")
-                })
+        Swal.fire({
+            title: "Are you sure?",
+            text: `You won't be able to Block `,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Block it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.put(`https://blood-donation-server-hazel-gamma.vercel.app/users-block/${id}`)
+                    .then(data => {
+                        if (data.data.modifiedCount > 0) {
+                            refetch()
+                            Swal.fire({
+                                title: "Blocked!",
+                                text: "You have successfully Blocked.",
+                                icon: "success"
+                            });
+
+                        }
+                    })
+
+
+            }
         })
-        refetch()
     }
     const handleStatusUnblock = (id) => {
-        const { data, refetch } = useQuery({
-            queryKey: ["updates"],
-            queryFn: axios.put(`http://localhost:5000/users-unblock/${id}`)
-                .then(data => {
-                    toast.success("you have successfully submitted")
-                })
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: `You won't be able to Unblock `,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Unblock it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                axios.put(`https://blood-donation-server-hazel-gamma.vercel.app/users-unblock/${id}`)
+                    .then(data => {
+                        refetch()
+                        Swal.fire({
+                            title: "Unblocked!",
+                            text: "You have successfully Unblocked.",
+                            icon: "success"
+                        });
+
+                    })
+
+
+            }
         })
-        refetch()
+
+
     }
 
     const handleAdmin = (id) => {
-        const { data, refetch } = useQuery({
-            queryKey: ["updates"],
-            queryFn: axios.put(`http://localhost:5000/users-role/${id}`)
-                .then(data => {
-                    toast.success("you have successfully submitted")
+        Swal.fire({
+            title: "Are you sure?",
+            text: `You won't  to Make Admin `,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Make it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const { data } = useQuery({
+                    queryKey: ["updates"],
+                    queryFn: axios.put(`https://blood-donation-server-hazel-gamma.vercel.app/users-role/${id}`)
+                        .then(data => {
+                            Swal.fire({
+                                title: "Admin!",
+                                text: "You have successfully Make Admin.",
+                                icon: "success"
+                            });
+                            refetch()
+                        })
                 })
+
+            }
         })
-        refetch()
+
+
+
     }
     const handleVolunteer = (id) => {
-        const { data, refetch } = useQuery({
-            queryKey: ["updates"],
-            queryFn: axios.put(`http://localhost:5000/users-role-volunteer/${id}`)
-                .then(data => {
-                    toast.success("you have successfully submitted")
+        Swal.fire({
+            title: "Are you sure?",
+            text: `You won't  to Make Volunteer `,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Make it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const { data } = useQuery({
+                    queryKey: ["updates"],
+                    queryFn: axios.put(`https://blood-donation-server-hazel-gamma.vercel.app/users-role-volunteer/${id}`)
+                        .then(data => {
+                            Swal.fire({
+                                title: "Volunteer!",
+                                text: "You have successfully Make Volunteer.",
+                                icon: "success"
+                            });
+                            refetch()
+                        })
                 })
+
+            }
         })
-        refetch()
+
+
+
     }
     const handleUser = (id) => {
-        const { data, refetch } = useQuery({
-            queryKey: ["updates"],
-            queryFn: axios.put(`http://localhost:5000/users-role-user/${id}`)
-                .then(data => {
-                    toast.success("you have successfully submitted")
+        Swal.fire({
+            title: "Are you sure?",
+            text: `You won't  to Make User `,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Make it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const { data } = useQuery({
+                    queryKey: ["updates"],
+                    queryFn: axios.put(`https://blood-donation-server-hazel-gamma.vercel.app/users-role-user/${id}`)
+                        .then(data => {
+                            Swal.fire({
+                                title: "User!",
+                                text: "You have successfully Make User.",
+                                icon: "success"
+                            });
+                            refetch()
+                        })
                 })
+
+            }
         })
-        refetch()
+
+
     }
     return (
         <div>

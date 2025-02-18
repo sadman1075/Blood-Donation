@@ -29,7 +29,7 @@ const AddBlog = () => {
 
         const { data } = useQuery({
             queryKey: ["blogs"],
-            queryFn: axios.post("http://localhost:5000/blog", AddBlog)
+            queryFn: axios.post("https://blood-donation-server-hazel-gamma.vercel.app/blog", AddBlog)
                 .then(data => {
                     if (data.data.acknowledged) {
                         Swal.fire({

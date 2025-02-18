@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { BiSolidDonateBlood } from "react-icons/bi";
 import { FaBloggerB, FaHome, FaUser } from "react-icons/fa";
 import { FcAbout } from "react-icons/fc";
-import { MdAdminPanelSettings, MdContactPage, MdDashboardCustomize, MdManageAccounts, MdRoundaboutLeft } from "react-icons/md";
+import { MdAdminPanelSettings, MdContactPage, MdDarkMode, MdDashboardCustomize, MdManageAccounts, MdOutlineDarkMode, MdRoundaboutLeft } from "react-icons/md";
 import { RiSidebarFoldFill } from "react-icons/ri";
 import { Link, Outlet } from "react-router-dom";
 import AuthContext from "../Context/AuthContext";
@@ -25,10 +25,29 @@ const Dashboard = () => {
             })
     }
 
+    const [active, setActive] = useState({
+        status: true,
+        element: "light"
 
+    })
+
+    const handleMode = (element) => {
+        if (element == "light") {
+            setActive({
+                status: true,
+                element: "light"
+            })
+        }
+        else {
+            setActive({
+                status: false,
+                element: "dark"
+            })
+        }
+    }
 
     return (
-        <div>
+        <div data-theme={`${active.status ? "light" : "dark"}`}>
             <div className="drawer lg:drawer-open">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content ">
@@ -54,7 +73,7 @@ const Dashboard = () => {
                         </div>
                         {
                             duser.role === "Admin" ? <>
-                            
+
                                 <li><Link to={"/dashboard"}><MdDashboardCustomize />Dashboard</Link></li>
                                 <li><Link to={"/dashboard/all-users"}><FaUser />All Users</Link></li>
                                 <li><Link to={"/dashboard/all-blood-donation-request"}><BiSolidDonateBlood />All Blood Donation Request</Link></li>
@@ -80,6 +99,7 @@ const Dashboard = () => {
                                         <li><Link to={`/dashboard/profile/${duser?._id}`}><MdAdminPanelSettings />Profile</Link></li>
 
 
+
                                     </>
                         }
 
@@ -90,8 +110,16 @@ const Dashboard = () => {
                         <li><Link to={"/About"}><MdRoundaboutLeft className="text-black" />
                             About</Link></li>
                         <li><Link to={"/contact"}><MdContactPage />Contact</Link></li>
+                        <li>
+                            {
+                                active.status ? <Link className="" onClick={() => handleMode("dark")} ><MdDarkMode />
+                                    Dark Mode </Link> : <Link className="" onClick={() => handleMode("light")} ><MdOutlineDarkMode />
+                                    Light Mode</Link>
+                            }
+                        </li>
                         <div className="mt-16">
                             <Link className="btn bg-red-500 text-white text-center w-full" onClick={handleLogOut}>Log out</Link>
+
                         </div>
 
                     </ul>

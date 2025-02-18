@@ -14,16 +14,16 @@ const AllBloodDonationRequest = () => {
 
     const { data, isPending, refetch } = useQuery({
         queryKey: ["donationinos"],
-        queryFn: async () => fetch("http://localhost:5000/all-donation-request")
+        queryFn: async () => fetch("https://blood-donation-server-hazel-gamma.vercel.app/all-donation-request")
             .then(res => res.json())
 
             .then(data => setDonationinfos(data))
 
     })
 
-    if (isPending) {
-        return <Loader></Loader>
-    }
+    // if (isPending) {
+    //     return <Loader></Loader>
+    // }
 
     const handleDeleteRequest = (donationinfo) => {
 
@@ -39,7 +39,7 @@ const AllBloodDonationRequest = () => {
             if (result.isConfirmed) {
                 const { data } = useQuery({
                     queryKey: ["deletedinfo"],
-                    queryFn: axios.delete(`http://localhost:5000/my-donation-request/${donationinfo?._id}`)
+                    queryFn: axios.delete(`https://blood-donation-server-hazel-gamma.vercel.app/my-donation-request/${donationinfo?._id}`)
                         .then(data => {
                             if (data.data.deletedCount > 0) {
                                 Swal.fire({
@@ -63,28 +63,25 @@ const AllBloodDonationRequest = () => {
     }
 
     const handledonestatus = (id) => {
-        console.log(id);
-        const { data } = useQuery({
-            queryKey: ["updates"],
-            queryFn: axios.put(`http://localhost:5000/donation-request-done/${id}`)
-                .then(data => {
-                    toast.success("you have successfully submitted")
-                })
-        })
 
-        refetch()
+        axios.put(`https://blood-donation-server-hazel-gamma.vercel.app/donation-request-done/${id}`)
+            .then(data => {
+                refetch()
+                toast.success("you have successfully update status")
+            })
+
+
+
 
     }
     const handlecalcelstatus = (id) => {
-        console.log(id);
-        const { data } = useQuery({
-            queryKey: ["updates"],
-            queryFn: axios.put(`http://localhost:5000/donation-request-cancel/${id}`)
-                .then(data => {
-                    toast.success("you have successfully submitted")
-                })
-        })
-        refetch()
+        axios.put(`https://blood-donation-server-hazel-gamma.vercel.app/donation-request-cancel/${id}`)
+            .then(data => {
+                refetch()
+                toast.success("you have successfully update status")
+
+            })
+
     }
     return (
         <div>

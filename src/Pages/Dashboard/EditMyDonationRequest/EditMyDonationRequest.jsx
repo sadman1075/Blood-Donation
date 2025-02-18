@@ -11,8 +11,8 @@ import Swal from "sweetalert2";
 const EditMyDonationRequest = () => {
     const [districts, setdistricts] = useState(null)
     const [upozilas, setupozilas] = useState(null)
-    const navigate=useNavigate()
-    const information=useLoaderData()
+    const navigate = useNavigate()
+    const information = useLoaderData()
     const { _id, recipient, district, upozila, hospital_name, address, blood_group, date, time, message, name, email, status } = information
 
     const [startDate, setStartDate] = useState(new Date());
@@ -46,23 +46,23 @@ const EditMyDonationRequest = () => {
         const status = "pending"
 
         const updateDonationInfo = {
-            _id,recipient, district, upozila, hospital_name, address, blood_group, date, time, message, name, email, status
+            _id, recipient, district, upozila, hospital_name, address, blood_group, date, time, message, name, email, status
         }
 
-        const {data}=useQuery({
-            queryKey:["updates"],
-            queryFn:axios.put(`http://localhost:5000/donation-request-update-details/${_id}`,updateDonationInfo)
-            .then(data=>{
-                if(data.data.acknowledged){
-                    Swal.fire({
-                        title: "Good job!",
-                        text: "Successfully Updated",
-                        icon: "success"
-                      });
-                      navigate(-1)
-                    
-                }
-            })
+        const { data } = useQuery({
+            queryKey: ["updates"],
+            queryFn: axios.put(`https://blood-donation-server-hazel-gamma.vercel.app/donation-request-update-details/${_id}`, updateDonationInfo)
+                .then(data => {
+                    if (data.data.acknowledged) {
+                        Swal.fire({
+                            title: "Good job!",
+                            text: "Successfully Updated",
+                            icon: "success"
+                        });
+                        navigate(-1)
+
+                    }
+                })
         })
     }
     return (
@@ -146,7 +146,7 @@ const EditMyDonationRequest = () => {
                                         <span className="label-text">Blood Group</span>
                                     </label>
                                     <select name="blood_group" defaultValue={blood_group} className="select select-bordered lg:w-[500px]" required>
-                                        <option  selected>A+</option>
+                                        <option selected>A+</option>
                                         <option>A-</option>
                                         <option>B+</option>
                                         <option>B-</option>

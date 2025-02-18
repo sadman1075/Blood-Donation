@@ -118,7 +118,7 @@ const Dashboard = () => {
                             }
                         </li>
                         <div className="mt-16">
-                            <Link className="btn bg-red-500 text-white text-center w-full" onClick={handleLogOut}>Log out</Link>
+                            <Link className="bt bg-red-500 text-white text-center w-full" onClick={handleLogOut}>Log out</Link>
 
                         </div>
 

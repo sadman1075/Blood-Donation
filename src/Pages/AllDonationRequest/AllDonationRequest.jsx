@@ -19,7 +19,7 @@ const AllDonationRequest = () => {
         return <Loader></Loader>
     }
     return (
-        <div className="pt-20 lg:pt-32">
+        <div className="pt-16 lg:pt-20  max-w-7xl mx-auto">
             <h1 className="pb-10 font-bold text-3xl lg:text-5xl text-center"> Donation Request</h1>
             {
                 donationinfos?.length == 0 ? <p className="text-center font-bold  lg:text-5xl text-red-400 mb-10">Your are not create any blood donation request</p> :

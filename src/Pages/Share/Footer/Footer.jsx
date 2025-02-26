@@ -2,7 +2,7 @@ import logo from "../../../assets/bg.png"
 
 const Footer = () => {
     return (
-    <div className="pt-20 ">
+    <div className="pt-16 lg:pt-20">
             <footer className="footer bg-neutral text-neutral-content lg:p-10">
                 <nav>
                     

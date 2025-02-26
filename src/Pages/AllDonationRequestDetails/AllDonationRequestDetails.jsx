@@ -53,7 +53,7 @@ const AllDonationRequestDetails = () => {
     }
 
     return (
-        <div className="pt-20 lg:pt-32">
+        <div className="pt-20 ">
             <div className="card bg-base-100 w-full lg:w-3/4 mx-auto shadow-xl">
                 <div className="card-body">
                     <h2 className="card-title text-4xl mb-8">All Information!</h2>

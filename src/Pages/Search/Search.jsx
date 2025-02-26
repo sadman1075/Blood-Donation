@@ -29,8 +29,8 @@ const Search = () => {
             .then(data => setupozilas(data))
     }, [])
     return (
-        <div className="pt-20">
-            <p className="text-2xl font-bold p-3 text-center">Filter (Search)</p>
+        <div className="pt-16 lg:pt-20">
+            <p className="text-3xl lg:text-5xl font-bold p-3 text-center">Filter For Blood (Search)</p>
 
             <div className="lg:flex justify-center gap-10">
                 <div className="mt-3">
@@ -72,7 +72,7 @@ const Search = () => {
             <div className="flex justify-center mt-5">
                 <Link onClick={handleSearch} className="btn bg-black text-white" >Search</Link>
             </div>
-            <div>
+            <div className="max-w-7xl mx-auto">
                 <h1 className="mb-10 mt-10 font-bold text-3xl lg:text-5xl text-center">Blood Donar Information </h1>
                 {
                     allInformation?.length == 0 ? <p className="text-center font-bold  lg:text-5xl text-red-400 mb-10">There is no  blood donar at this moment</p> :

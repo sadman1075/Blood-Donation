@@ -8,7 +8,7 @@ import { FaHospital, FaUser } from "react-icons/fa";
 const LatestDonationRequest = ({ donationRequest }) => {
     const { _id, blood_group, recipient, address, date,hospital_name } = donationRequest
     return (
-        <div>
+        <div >
             <div className="card card-compact bg-base-100 w-full h-[450px] shadow-xl" data-aos="zoom-in" data-aos-duration="2000">
                 <figure>
                     <img

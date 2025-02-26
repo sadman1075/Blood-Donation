@@ -26,7 +26,7 @@ const Layouts = () => {
     }
 
     return (
-        <div className="max-w-7xl mx-auto" data-theme={`${active.status ? "light" : "dark"}`} >
+        <div className="" data-theme={`${active.status ? "light" : "dark"}`} >
             <Header handleMode={handleMode} active={active}></Header>
             <Outlet></Outlet>
             <Footer></Footer>

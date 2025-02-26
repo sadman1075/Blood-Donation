@@ -18,8 +18,8 @@ const Funding = () => {
 
     return (
         <div>
-            <div className="pt-20 lg:pt-32">
-                <h1 className="text-5xl font-bold text-center mb-20">Funding</h1>
+            <div className="pt-16 lg:pt-20 ">
+                <h1 className="text-3xl lg:text-5xl font-bold text-center mb-10  lg:mb-20">Funding</h1>
                 <div className="flex justify-end pb-6 mr-5 lg:mr-10">
                     <Link className="btn bg-black text-white" to={"/add-funding"}>Give Funding</Link>
 

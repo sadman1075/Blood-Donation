@@ -36,7 +36,7 @@ const ContentManagement = ({ blog, publishupdate, unpublishupdate, deleteupdate 
     return (
         <div className=''>
             <div>
-                <div className="card card-compact bg-base-100 lg:w-96 shadow-xl">
+                <div className="card card-compact bg-base-100 lg:w-96 lg:h-[440px]  shadow-xl">
                     <figure>
                         <img
                             src={image}

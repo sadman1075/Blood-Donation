@@ -36,7 +36,7 @@ const Header = ({ active, handleMode }) => {
     </>
     return (
         <div>
-            <div className="navbar fixed z-10 opacity-65 max-w-screen-xl text-white bg-black">
+            <div className="navbar fixed z-10 opacity-75  text-white bg-black">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

@@ -9,7 +9,7 @@ const AddFunding = () => {
 
     return (
         <div>
-            <div className="pt-20 lg:pt-32">
+            <div className=" pt-16 lg:pt-20 max-w-7xl mx-auto">
                 <div >
                     <Helmet>
                         <title>Give Funding | Blood Donation</title>

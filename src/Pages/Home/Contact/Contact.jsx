@@ -13,8 +13,8 @@ const Contact = () => {
         console.log(contactInfo);
     }
     return (
-        <div>
-            <div className="hero bg-base-200 min-h-screen rounded-3xl pt-20 pb-20">
+        <div className="pt-16 lg:pt-20">
+            <div className="hero bg-base-200 min-h-screen rounded-3xl  pt-10 pb-10">
                 <div className="hero-content ">
                     <div className="card bg-base-100 w-full  shadow-2xl">
                         <h1 className="text-center text-3xl lg:text-5xl font-bold mt-6">Contact Us</h1>

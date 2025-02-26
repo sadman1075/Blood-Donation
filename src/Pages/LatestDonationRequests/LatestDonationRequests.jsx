@@ -13,10 +13,10 @@ const LatestDonationRequests = () => {
     })
 
     return (
-        <div className="pt-20 pb-20">
+        <div className=" pt-16 lg:pt-20">
             <div>
                 <h1 className="text-center font-bold text-3xl lg:text-5xl">Latest Blood Donation Request Posts</h1>
-                <div className="mt-16 grid lg:grid-cols-3 md:grid-cols-2 gap-8 p-2 lg:p-8">
+                <div className="mt-10 grid lg:grid-cols-3 md:grid-cols-2 gap-8 p-2 lg:p-8">
 
                     {
                         latestDonation?.map(donationRequest => <LatestDonationRequest key={donationRequest._id} donationRequest={donationRequest}></LatestDonationRequest>)

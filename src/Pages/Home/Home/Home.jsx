@@ -3,19 +3,23 @@ import LatestDonationRequests from "../../LatestDonationRequests/LatestDonationR
 import Reviews from "../../Reviews/Reviews";
 import About from "../About/About";
 import Banner from "../Banner/Banner";
+import Benifits from "../Benifits/Benifits";
 import Blogs from "../Blogs/Blogs";
 import Contact from "../Contact/Contact";
 
 const Home = () => {
     return (
-        <div>
+        <div className="">
             <Banner></Banner>
-            <About></About>
-            <LatestDonationRequests></LatestDonationRequests>
-            <Contact></Contact>
-            <Blogs></Blogs>
-            <Reviews></Reviews>
-            <DonarSponser></DonarSponser>
+            <div className="max-w-7xl mx-auto">
+                <About></About>
+                <Benifits></Benifits>
+                <LatestDonationRequests></LatestDonationRequests>
+                <Contact></Contact>
+                <Blogs></Blogs>
+                <Reviews></Reviews>
+                <DonarSponser></DonarSponser>
+            </div>
         </div>
     );
 };

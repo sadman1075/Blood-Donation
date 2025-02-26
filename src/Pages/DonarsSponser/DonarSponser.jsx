@@ -9,8 +9,8 @@ import d7 from "../../../public/d7.jpg"
 
 const DonarSponser = () => {
     return (
-        <div className="pt-20 pb-20">
-            <h1 className="text-3xl lg:text-5xl font-bold text-center mt-6 mb-20">Blood Donations</h1>
+        <div className="pt-10 lg:pt-20">
+            <h1 className="text-3xl lg:text-5xl font-bold text-center  mb-8">Blood Donations</h1>
             <Marquee>
                 <div className="flex gap-8">
                     <img className="h-60 w-60" src={d1} alt=""  />

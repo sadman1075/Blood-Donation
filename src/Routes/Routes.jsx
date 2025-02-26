@@ -24,6 +24,7 @@ import Profile from "../Pages/Profile/Profile";
 import Search from "../Pages/Search/Search";
 import Funding from "../Pages/Funding/Funding";
 import AddFunding from "../Pages/AddFunding/AddFunding";
+import Error from "../Pages/Error/Error";
 
 export const router = createBrowserRouter([
 
@@ -132,5 +133,9 @@ export const router = createBrowserRouter([
             }
 
         ]
+    },
+    {
+        path:"*",
+        element:<Error></Error>
     }
 ])
